@@ -1,0 +1,12 @@
+walled 
+left 
+started 
+freed 
+canceled 
+brought 
+granted 
+turned 
+arrested 
+jailed 
+looted 
+aged 

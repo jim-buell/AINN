@@ -1,0 +1,10 @@
+dies 
+wins 
+faces 
+sends 
+comes 
+listen 
+faces 
+presses 
+raises 
+kills 

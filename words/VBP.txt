@@ -1,0 +1,10 @@
+say 
+search 
+lightbulbs 
+offer 
+say 
+stretch 
+remain 
+show 
+m 
+win 
