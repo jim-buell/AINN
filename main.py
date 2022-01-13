@@ -1,7 +1,8 @@
 import random
-from guizero import App, Text
+from guizero import App, Text, Window
+import time
 
-mainStr = "Hello World"
+mainStr = ""
 counter = 0
 dispStr = ""
 
@@ -37,10 +38,16 @@ def typeSen():
 	return mainStr
 		
 #initiates the GUI
-app = App(title="Infinite Scroll 2.0", width=1800, height=80,)
+app = App(title="Infinite Scroll 2.0", bg="#000000")
+
+def pause():
+	nothing = 0
+	nothing += 1
+	print(nothing)
 
 #main text display 
-displayText = Text(app, text="start", size=72, font="akkurat mono")
+blankLeft = Text(app, text = " ", size = 72, align = "left", font = "akkurat mono", bg = "#000000")
+displayText = Text(app, text = "", size = 72, font = "akkurat mono", bg = "#000000", color = "#ffffff", align="left")
 
 #calls the sentence creator and updates the display text
 def updateText():
@@ -49,20 +56,26 @@ def updateText():
 	global mainStr
 	dispStr = dispStr + mainStr[counter]
 	displayText.value = dispStr
-	counter = counter + 1
+	counter += 1
 	print(counter)
 	if counter >= len(mainStr):
+		app.after(1000, pause)
 		mainStr = ""
 		typeSen()
 		counter = 0
-		dispStr = ""
+		dispStr = " "
+		time.sleep(1.5)
 
-#calls updateText repeatedly in the app loop — gets new sentences to pass to the GUI
-#app.repeat(1000, typeSen)
+#calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
 app.repeat(150, updateText)
 
-#this is the main GUI loop
+#sets the initial sentence 
 typeSen()
+
+#sets full screen
+app.set_full_screen()
+
+#this is the main GUI loop
 app.display()
 
 
