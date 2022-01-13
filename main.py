@@ -1,5 +1,4 @@
 import random
-from guizero import App
 from guizero import App, Text
 
 #gets a random word from a list of specified word types. Pass a str indicating the 
@@ -16,13 +15,13 @@ def getword(wordType):
 	
 def typeSen():
 	#sentence structures 
-	struct1 = ["NN", "VBZ", "JJ", "NNS"]
-	struct2 = ["NNP", "VBN", "NN"]
+	struct1 = ["NN", "verbTrans", "JJ", "NNP"]
+	struct2 = ["NN", "verbTrans", "NNP"]
 	struct3 = ["NNP", "verbTrans", "JJ", "NN"]
+	struct4 = ["NNP", "verbTrans", "NN"]
 	
-	allSentences = [struct3]
+	allSentences = [struct1, struct2, struct3, struct4]
 	
-	x = 0
 	mainStr = ""
 	wordSeq = allSentences[random.randrange(0, len(allSentences))]
 	for item in wordSeq:
@@ -30,12 +29,21 @@ def typeSen():
 	mainStr = mainStr.upper()
 	#print(mainStr)
 	return mainStr
-		
-#testTypeSen()
-		
-app = App(title="Infinite Scroll 2.0")
+				
+#initiates the GUI
+app = App(title="Infinite Scroll 2.0", width=800, height=30,)
 
-welcome_message = Text(app, text="{}".format(typeSen()))
+#main text display 
+displayText = Text(app, text="{}".format(typeSen()), size=72, font="akkurat mono")
+
+#calls the sentence creator and updates the display text
+def updateText():
+	displayText.value = typeSen()
+
+#calls updateText repeatedly in the app loop — gets new sentences to pass to the GUI
+app.repeat(3000, updateText)
+
+#this is the main loop
 app.display()
 
 
