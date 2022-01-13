@@ -28,11 +28,12 @@ def typeSen():
 	
 	allSentences = [struct1, struct2, struct3, struct4, struct5]
 	
+	#add words to the main string. There's an extra space in the from of the string to make the timing better. 
 	global mainStr
 	mainStr = ""
 	wordSeq = allSentences[random.randrange(0, len(allSentences))]
 	for item in wordSeq:
-		mainStr = mainStr + getword("{}".format(item)) + " "
+		mainStr = " " + mainStr + getword("{}".format(item)) + " "
 	mainStr = mainStr.upper()
 	#print(mainStr)
 	return mainStr
@@ -46,7 +47,7 @@ def pause():
 	print(nothing)
 
 #main text display 
-blankLeft = Text(app, text = " ", size = 72, align = "left", font = "akkurat mono", bg = "#000000")
+#blankLeft = Text(app, text = "", size = 72, align = "left", font = "akkurat mono", bg = "#000000")
 displayText = Text(app, text = "", size = 72, font = "akkurat mono", bg = "#000000", color = "#ffffff", align="left")
 
 #calls the sentence creator and updates the display text
@@ -65,6 +66,7 @@ def updateText():
 		counter = 0
 		dispStr = " "
 		time.sleep(1.5)
+		displayText.value = ""
 
 #calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
 app.repeat(150, updateText)
