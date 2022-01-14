@@ -142,7 +142,7 @@ def typeSen():
 	#print(mainStr)
 	return mainStr
 
-#function that calls the sentence creator, updates the display, and scrolls the text
+#function that updates the display, scrolls the text and calls the sentence creator when finished
 def updateText():
 	global counter
 	global dispStr
@@ -185,19 +185,18 @@ logo.align = "left"
 displayText = TextBox(app, text = "", multiline = True, grid = [1, 3])
 
 #textBox properties 
-displayText.font = "akkurat mono"
+displayText.font = "akkurat mono regular"
 displayText.text_color = "#00ff00"
 displayText.text_size = 50
 displayText.align = "left"
 displayText.tk.config(cursor = "none", highlightbackground = "#000000")
-displayText.borderwidth = 0
 displayText.height = 8
 displayText.width = 16
 
 #padding for logo
 top_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 0])
 bottom_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 2])
-left_pad = Box(app, align = "left", height = 30, width = 30, grid = [0, 0])
+left_pad = Box(app, align = "left", height = 30, width = 45, grid = [0, 0])
 
 #calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
 app.repeat(200, updateText)
@@ -205,7 +204,7 @@ app.repeat(200, updateText)
 #gets new headlines every 2 hours
 app.repeat(7200000, fetchNew)
 
-#gets updated news database
+#gets updated news database at launch 
 #fetchNew()
 
 #sets the initial sentence 
