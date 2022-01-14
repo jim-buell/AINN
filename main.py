@@ -1,10 +1,11 @@
 import random
-from guizero import App, Text, Window
+from guizero import App, Text
 import time
 
 mainStr = ""
 counter = 0
 dispStr = ""
+blinkTime = 0
 
 #gets a random word from a list of specified word types. Pass a str indicating the 
 #part of speech to get that type of word. 
@@ -41,35 +42,46 @@ def typeSen():
 #initiates the GUI
 app = App(title="Infinite Scroll 2.0", bg="#000000")
 
-def pause():
-	nothing = 0
-	nothing += 1
-	print(nothing)
-
 #main text display 
 #blankLeft = Text(app, text = "", size = 72, align = "left", font = "akkurat mono", bg = "#000000")
-displayText = Text(app, text = "", size = 72, font = "akkurat mono", bg = "#000000", color = "#ffffff", align="left")
+displayText = Text(app, text = "", size = 72, font = "akkurat mono", bg = "#000000", color = "#00ff00", align="left")
 
 #calls the sentence creator and updates the display text
 def updateText():
 	global counter
 	global dispStr
 	global mainStr
-	dispStr = dispStr + mainStr[counter]
-	displayText.value = dispStr
-	counter += 1
-	print(counter)
+	global blinkTime
 	if counter >= len(mainStr):
-		app.after(1000, pause)
-		mainStr = ""
-		typeSen()
-		counter = 0
-		dispStr = " "
-		time.sleep(1.5)
-		displayText.value = ""
+		#this blinks the cursor at the end of typing
+		if blinkTime <= 6:
+			if (blinkTime % 2) == 0:
+				dispStr = dispStr.replace("█", "")
+				displayText.value = dispStr
+				blinkTime += 1
+				#time.sleep(0.25)
+			else:
+				dispStr = dispStr + "█"
+				displayText.value = dispStr
+				blinkTime += 1
+				#time.sleep(0.25)
+		else:			
+			mainStr = ""
+			typeSen()
+			counter = 0
+			dispStr = " "
+			displayText.value = ""
+			blinkTime = 0
+	else:
+		dispStr = dispStr.replace("█", "")
+		dispStr = dispStr + mainStr[counter] + "█"
+		displayText.value = dispStr
+		counter += 1
+		#print(counter)
+	
 
 #calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
-app.repeat(150, updateText)
+app.repeat(200, updateText)
 
 #sets the initial sentence 
 typeSen()
