@@ -1,9 +1,8 @@
-hit 
-uncovered 
-changed 
-mulled 
-doubled 
-happened 
-met 
-pressed 
 said 
+blasted 
+arrested 
+charged 
+decided 
+revoked 
+doomed 
+postponed 
