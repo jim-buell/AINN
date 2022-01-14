@@ -15,6 +15,8 @@ mainStr = ""
 counter = 0
 dispStr = ""
 blinkTime = 0
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""]}
+verbTrans = ["texts", "remembers", "answers", "becomes", "finds", "ends", "rescues", "makes", "faces", "sends", "leaves", "presses", "cancels", "begins", "raises", "kills"]
 
 def grabNewHeadlines():
 	# Init
@@ -84,9 +86,6 @@ def sortAndStore(part):
 		
 		groups = groupby(tagged, key=lambda x: x[1])
 		typeNames = [[w for w,_ in words] for tag,words in groups if tag=="{}".format(part)]
-		#if part == "NNPq":
-		#	typeNames = [" ".join(name) for name in typeNames if len(name)>=2]
-		#else:
 		typeNames = [" ".join(name) for name in typeNames if len(name)>=0] 
 		typeList += typeNames
 	
@@ -97,11 +96,15 @@ def sortAndStore(part):
 		f.write(newStr + " \n")
 	else:
 		f.close()
-	#print("{}".format(part) + ":", typeList)
+	
+	#add words to global ListCommand
+	wordDict["{}".format(part)] = []
+	wordDict.update({"{}".format(part): typeList})
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
+	typeList = ["JJ", "NN", "NNP"]
+	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
 
@@ -113,12 +116,10 @@ def fetchNew():
 #gets a random word from a list of specified word types. Pass a str indicating the 
 #part of speech to get that type of word. 
 def getword(wordType):
-	File = open(r"words/{}.txt".format(wordType), "r")
-	wordList = []
-	Lines = File.readlines()
-	for item in Lines:
-		wordList.append(item.strip())
-	nextWord = wordList[random.randrange(0, len(wordList))]
+	if "verbTrans" in wordType:
+		nextWord = verbTrans[random.randrange(0, len(verbTrans))]
+	else:
+		nextWord = wordDict["{}".format(wordType)][random.randrange(0, len(wordDict["{}".format(wordType)]))]
 	return nextWord
 	
 #function that picks a sentence structure and then grabs random words to form a sentence
@@ -207,7 +208,8 @@ app.repeat(7200000, fetchNew)
 #gets updated news database at launch 
 #fetchNew()
 
-#sets the initial sentence 
+#loads words and sets the initial sentence
+getAllTypes()
 typeSen()
 
 #sets full screen
