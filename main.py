@@ -1,5 +1,5 @@
 import random
-from guizero import App, Text
+from guizero import App, TextBox, Text, Picture, Box
 import time
 
 mainStr = ""
@@ -16,9 +16,9 @@ def getword(wordType):
 	for item in Lines:
 		wordList.append(item.strip())
 	nextWord = wordList[random.randrange(0, len(wordList))]
-	#print("The selected word is ", verbList[random.randrange(0, len(verbList))])
 	return nextWord
 	
+#function that picks a sentence structure and then grabs random words to form a sentence
 def typeSen():
 	#sentence structures 
 	struct1 = ["NN", "verbTrans", "JJ", "NN"]
@@ -29,24 +29,17 @@ def typeSen():
 	
 	allSentences = [struct1, struct2, struct3, struct4, struct5]
 	
-	#add words to the main string. There's an extra space in the from of the string to make the timing better. 
+	#add words to the main string.
 	global mainStr
 	mainStr = ""
 	wordSeq = allSentences[random.randrange(0, len(allSentences))]
 	for item in wordSeq:
-		mainStr = " " + mainStr + getword("{}".format(item)) + " "
+		mainStr = mainStr + getword("{}".format(item)) + " "
 	mainStr = mainStr.upper()
 	#print(mainStr)
 	return mainStr
-		
-#initiates the GUI
-app = App(title="Infinite Scroll 2.0", bg="#000000")
 
-#main text display 
-#blankLeft = Text(app, text = "", size = 72, align = "left", font = "akkurat mono", bg = "#000000")
-displayText = Text(app, text = "", size = 72, font = "akkurat mono", bg = "#000000", color = "#00ff00", align="left")
-
-#calls the sentence creator and updates the display text
+#function that calls the sentence creator, updates the display, and scrolls the text
 def updateText():
 	global counter
 	global dispStr
@@ -59,17 +52,15 @@ def updateText():
 				dispStr = dispStr.replace("█", "")
 				displayText.value = dispStr
 				blinkTime += 1
-				#time.sleep(0.25)
 			else:
 				dispStr = dispStr + "█"
 				displayText.value = dispStr
 				blinkTime += 1
-				#time.sleep(0.25)
 		else:			
 			mainStr = ""
 			typeSen()
 			counter = 0
-			dispStr = " "
+			dispStr = ""
 			displayText.value = ""
 			blinkTime = 0
 	else:
@@ -77,8 +68,31 @@ def updateText():
 		dispStr = dispStr + mainStr[counter] + "█"
 		displayText.value = dispStr
 		counter += 1
-		#print(counter)
-	
+		#print(dispStr)
+		
+#initiates the GUI
+app = App(title="Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
+
+#sets the logo
+logo = Picture(app, image="logo.png", grid = [0, 1])
+logo.tk.config(bd = 0, cursor = "none")
+
+#main text display 
+displayText = TextBox(app, text = "", multiline = True, grid = [0, 3])
+
+#textBox properties 
+displayText.font = "akkurat mono"
+displayText.text_color = "#00ff00"
+displayText.text_size = 50
+displayText.align = "left"
+displayText.tk.config(cursor = "none", bd = 50, highlightbackground = "#000000")
+displayText.borderwidth = 0
+displayText.height = 8
+displayText.width = 16
+
+#padding for logo
+top_pad = Box(app, align = "left", height = 50, width = 5, grid = [0, 0])
+bottom_pad = Box(app, align = "left", height = 1, width = 5, grid = [0, 2])
 
 #calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
 app.repeat(200, updateText)
@@ -87,12 +101,7 @@ app.repeat(200, updateText)
 typeSen()
 
 #sets full screen
-app.set_full_screen()
+#app.set_full_screen()
 
 #this is the main GUI loop
 app.display()
-
-
-
-
-
