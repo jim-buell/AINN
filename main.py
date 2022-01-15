@@ -15,6 +15,7 @@ mainStr = ""
 counter = 0
 dispStr = ""
 blinkTime = 0
+wordWrap = 0
 wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""]}
 
 def grabNewHeadlines():
@@ -113,7 +114,6 @@ def sortAndStore(part):
 		for element in typeList:
 			wordDict["{}".format(part)] = []
 			wordDict.update({"{}".format(part): typeList})
-	print(wordDict)
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
@@ -160,6 +160,7 @@ def updateText():
 	global dispStr
 	global mainStr
 	global blinkTime
+	global wordWrap
 	if counter >= len(mainStr):
 		#this blinks the cursor at the end of typing
 		if blinkTime <= 6:
@@ -178,12 +179,31 @@ def updateText():
 			dispStr = ""
 			displayText.value = ""
 			blinkTime = 0
+			wordWrap = 0
 	else:
-		dispStr = dispStr.replace("█", "")
-		dispStr = dispStr + mainStr[counter] + "█"
-		displayText.value = dispStr
-		counter += 1
-		#print(dispStr)
+		if wordWrap > 7 and (counter + 1) < len(mainStr):			
+			#if it's been a lot of letters and there's a space, hit return
+			if " " in mainStr[counter]:
+				dispStr = dispStr + "\n"
+				dispStr = dispStr.replace("█", "")
+				dispStr = dispStr + "█"
+				displayText.value = dispStr
+				counter += 1
+				wordWrap = 0
+			#if there's been a lot of letter but no space yet, keep typing
+			else:
+				dispStr = dispStr.replace("█", "")
+				dispStr = dispStr + mainStr[counter] + "█"
+				displayText.value = dispStr
+				counter += 1
+				wordWrap += 1
+		else:
+			dispStr = dispStr.replace("█", "")
+			dispStr = dispStr + mainStr[counter] + "█"
+			displayText.value = dispStr
+			counter += 1
+			wordWrap += 1
+			#print(dispStr)
 		
 #initiates the GUI
 app = App(title="Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
