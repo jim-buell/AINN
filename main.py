@@ -125,7 +125,7 @@ def getAllTypes():
 def fetchNew():
 	grabNewHeadlines()
 	getAllTypes()
-	print("Fetched new headlines.")
+	print("Fetched new headlines at", time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()))
 
 #gets a random word from a list of specified word types. Pass a str indicating the 
 #part of speech to get that type of word. 
@@ -151,8 +151,12 @@ def typeSen():
 	for item in wordSeq:
 		mainStr = mainStr + getword("{}".format(item)) + " "
 	mainStr = mainStr.upper()
-	#print(mainStr)
-	return mainStr
+	#skips sentences that will cause the text to jump 
+	if len(mainStr) >= 16:
+		if mainStr[16] == " ":
+			typeSen()
+	else:
+		return mainStr
 
 #function that updates the display, scrolls the text and calls the sentence creator when finished
 def updateText():
@@ -181,7 +185,7 @@ def updateText():
 			blinkTime = 0
 			wordWrap = 0
 	else:
-		if wordWrap > 7 and (counter + 1) < len(mainStr):			
+		if wordWrap > 7 and (counter + 8) < len(mainStr):			
 			#if it's been a lot of letters and there's a space, hit return
 			if " " in mainStr[counter]:
 				dispStr = dispStr + "\n"
