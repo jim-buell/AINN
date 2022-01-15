@@ -197,11 +197,11 @@ logo.align = "left"
 displayText = TextBox(app, text = "", multiline = True, grid = [1, 3])
 
 #textBox properties 
-displayText.font = "akkurat mono regular"
+displayText.font = "GT America Mono"
 displayText.text_color = "#00ff00"
 displayText.text_size = 50
 displayText.align = "left"
-displayText.tk.config(cursor = "none", highlightbackground = "#000000")
+displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
 displayText.height = 8
 displayText.width = 16
 
