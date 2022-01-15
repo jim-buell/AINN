@@ -15,8 +15,7 @@ mainStr = ""
 counter = 0
 dispStr = ""
 blinkTime = 0
-wordDict = {"NN": [""], "JJ": [""], "NNP": [""]}
-verbTrans = ["texts", "remembers", "answers", "becomes", "finds", "ends", "rescues", "makes", "faces", "sends", "leaves", "presses", "cancels", "begins", "raises", "kills"]
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""]}
 
 def grabNewHeadlines():
 	# Init
@@ -88,22 +87,37 @@ def sortAndStore(part):
 		typeNames = [[w for w,_ in words] for tag,words in groups if tag=="{}".format(part)]
 		typeNames = [" ".join(name) for name in typeNames if len(name)>=0] 
 		typeList += typeNames
+	File.close()
 	
-	overWrite = "w"
-	f = open("words/{}.txt".format(part), "{}".format(overWrite))
-	for element in typeList:
-		newStr = element.strip("'")
-		f.write(newStr + " \n")
+	#loads static words stored in files
+	if "verbTrans" not in part:
+		overWrite = "w"
+		f = open("words/{}.txt".format(part), "{}".format(overWrite))
+		for element in typeList:
+			newStr = element.strip("'")
+			f.write(newStr + " \n")
+		else:
+			f.close()
+	
+	#add words to global wordDict
+	if "verbTrans" in part:
+		wordDict["{}".format(part)] = []
+		edgeFile = open("words/{}.txt".format(part), "r")
+		listTemp = edgeFile.readlines()
+		edgeList = []
+		for item in listTemp:
+			edgeList.append(item.strip())
+		wordDict.update({"{}".format(part): edgeList})
+		edgeFile.close()
 	else:
-		f.close()
-	
-	#add words to global ListCommand
-	wordDict["{}".format(part)] = []
-	wordDict.update({"{}".format(part): typeList})
+		for element in typeList:
+			wordDict["{}".format(part)] = []
+			wordDict.update({"{}".format(part): typeList})
+	print(wordDict)
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "NN", "NNP"]
+	typeList = ["JJ", "NN", "NNP", "verbTrans"]
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
@@ -116,10 +130,7 @@ def fetchNew():
 #gets a random word from a list of specified word types. Pass a str indicating the 
 #part of speech to get that type of word. 
 def getword(wordType):
-	if "verbTrans" in wordType:
-		nextWord = verbTrans[random.randrange(0, len(verbTrans))]
-	else:
-		nextWord = wordDict["{}".format(wordType)][random.randrange(0, len(wordDict["{}".format(wordType)]))]
+	nextWord = wordDict["{}".format(wordType)][random.randrange(0, len(wordDict["{}".format(wordType)]))]
 	return nextWord
 	
 #function that picks a sentence structure and then grabs random words to form a sentence
