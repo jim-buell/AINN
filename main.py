@@ -9,6 +9,7 @@ from itertools import groupby
 import random
 from guizero import App, TextBox, Text, Picture, Box
 import time
+import re
 
 #global variables that persist to facilitate GUI display refresh
 mainStr = ""
@@ -37,7 +38,14 @@ def grabNewHeadlines():
 						headlineList.append(f"{articles['title']}.")
 					else:
 						headlineList.append(f"{articles['title']}.")
-	print(headlineList) 
+	print(headlineList)
+	
+	#record time of headline fetch in milliseconds from epoch
+	currentTime = round(time.time() * 1000)
+	f = open("elapsedTime.txt", "w")
+	timeStr = str(currentTime)
+	f.write(timeStr)
+	f.close()
 	
 	#append headlines to master file
 	f = open("masterHeadlines.txt", "a")
@@ -150,10 +158,12 @@ def typeSen():
 	wordSeq = allSentences[random.randrange(0, len(allSentences))]
 	for item in wordSeq:
 		mainStr = mainStr + getword("{}".format(item)) + " "
+	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
-	#skips sentences that will cause the text to jump 
+	#skips sentences that will cause the text to jump on the first line
 	if len(mainStr) >= 16:
-		if mainStr[16] == " ":
+		if mainStr[15] == " ":
+			print("skipping a 16er")
 			typeSen()
 	else:
 		return mainStr
@@ -208,7 +218,26 @@ def updateText():
 			counter += 1
 			wordWrap += 1
 			#print(dispStr)
-		
+
+#checks to see if headlines are more than 1 hours old and gets new if so	
+def checkAge():
+	f = open(r"elapsedTime.txt", "r")
+	lastTime = int(f.read().rstrip())
+	currentTime = round(time.time() * 1000)
+	elapsedTime = (currentTime - lastTime)
+	print("Elapsed time is ", elapsedTime)
+	if elapsedTime >= 3600000:
+		print("Headlines are more than an hour old. Need to get a new set.")
+		fetchNew()
+	else:
+		print("Keeping existing headlines.")
+
+#turns headline to title case		
+def titlecase(s):
+    return re.sub(
+        r"[A-Za-z]+('[A-Za-z]+)?",
+        lambda word: word.group(0).capitalize(), s)
+	
 #initiates the GUI
 app = App(title="Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 
@@ -240,10 +269,9 @@ app.repeat(200, updateText)
 #gets new headlines every 2 hours
 app.repeat(7200000, fetchNew)
 
-#gets updated news database at launch 
-#fetchNew()
-
-#loads words and sets the initial sentence
+#startup sequences
+#checks if new headlines needed on startup, loads words, and sets the initial sentence
+checkAge()
 getAllTypes()
 typeSen()
 
