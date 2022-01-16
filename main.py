@@ -225,7 +225,7 @@ def checkAge():
 	lastTime = int(f.read().rstrip())
 	currentTime = round(time.time() * 1000)
 	elapsedTime = (currentTime - lastTime)
-	print("Elapsed time is ", elapsedTime)
+	print("Elapsed time is", round((elapsedTime / 60000)), "minutes.")
 	if elapsedTime >= 3600000:
 		print("Headlines are more than an hour old. Need to get a new set.")
 		fetchNew()
