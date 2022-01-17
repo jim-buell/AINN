@@ -7,7 +7,7 @@ from nltk.corpus import wordnet as wn
 from nltk.tokenize import word_tokenize, sent_tokenize
 from itertools import groupby
 import random
-from guizero import App, TextBox, Text, Picture, Box
+from guizero import App, TextBox, Picture, Box
 import time
 import re
 
@@ -161,8 +161,8 @@ def typeSen():
 	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
 	#skips sentences that will cause the text to jump on the first line
-	if len(mainStr) >= 16:
-		if mainStr[15] == " ":
+	if len(mainStr) >= 17:
+		if mainStr[16] == " ":
 			print("skipping a 16er")
 			typeSen()
 	else:
