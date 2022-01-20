@@ -169,17 +169,16 @@ def getword(wordType):
 	
 #function that picks a sentence structure and then grabs random words to form a sentence
 def typeSen():
-	#sentence parts
-	senParts = ["NN", "NNP", "ideo"]
+	#sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
+	senParts = ["NN", "NNP", "NNP", "NNP", "ideo"]
 	
 	#sentence structures 
 	struct1 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
-	struct2 = ["{}".format(senParts), "verbTrans", "JJ", "{}".format(senParts)]
-	struct3 = [ "JJ", "{}".format(senParts), "verbTrans", "JJ", "{}".format(senParts)]
-	struct4 = [ "JJ", "{}".format(senParts), "verbTrans", "{}".format(senParts)]
+	struct2 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", "JJ", "NN"] 
+	struct3 = ["JJ", "NN", "verbTrans",(senParts[random.randrange(0, len(senParts))])]
+	struct4 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
 	
-	allSentences = [struct1]
-	print(struct1)
+	allSentences = [struct1, struct2, struct3, struct4]
 	
 	#add words to the main string.
 	global mainStr
@@ -194,6 +193,10 @@ def typeSen():
 		if mainStr[16] == " ":
 			#print("skipping a 16er")
 			typeSen()
+	elif len(mainStr) >= 80:
+		print("String was ", len(mainStr), " long, so skipping.")
+		print("The long string was: ", mainStr)
+		typeSen()
 	else:
 		return mainStr
 
@@ -257,7 +260,7 @@ def updateText():
 				displayText.value = dispStr
 				counter += 1
 				wordWrap += 1
-				print(dispStr)
+				#print(dispStr)
 
 
 #checks to see if headlines are more than 1 hours old and gets new if so	

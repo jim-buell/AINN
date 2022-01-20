@@ -1,3 +1,5 @@
+price 
+demand 
 news conference 
 criticism 
 news conference 
@@ -13,12 +15,16 @@ approval
 defeat 
 push 
 filibuster 
-program feed 
 control education 
 school 
 parenting custody 
 couple 
 test case 
+executive 
+year 
+part 
+investigation 
+synagogue standoff 
 rebuke 
 decision 
 Video 
@@ -30,20 +36,15 @@ home
 way 
 committee 
 election fraud conspiracy 
-Analysis 
-news conference 
 division 
-actor 
-accident 
 fall victim 
 investigation 
 business empire 
+eruption 
+ash 
 Omicron 
 whirlwind dash 
 year 
-A68 
-volume 
-water 
 report 
 Tonga 
 aid 
@@ -51,8 +52,23 @@ synagogue
 hostage-taker surrender 
 tension 
 quit 
+panel 
+age 
+cohort 
+clock 
+gambit 
+consistency novelty 
+policy 
+hockey 
+game 
+jolt 
+playoff showdown 
+stake firm 
+drug combat 
+labor 
 infection alert 
 level 
+quasi-emergency 
 syndrome 
 power 
 repair 
@@ -72,26 +88,10 @@ footballer
 funding 
 tsunami 
 climate risk 
-airport 
-phone 
+aid 
+telephone 
 volcano eruption 
 rally 
 aviation 
 aviation turmoil 
 property 
-cooperation 
-move 
-message 
-moratorium 
-missile 
-trade insurance coverage 
-boost 
-support semiconductor supply 
-work 
-home east 
-eviction 
-thriller 
-carbon tax 
-fund 
-net zero 
-Probation 
