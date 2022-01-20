@@ -7,7 +7,7 @@ from nltk.corpus import wordnet as wn
 from nltk.tokenize import word_tokenize, sent_tokenize
 from itertools import groupby
 import random
-from guizero import App, TextBox, Picture, Box
+from guizero import App, TextBox, Picture, Box, Window
 import time
 import re
 
@@ -17,7 +17,11 @@ counter = 0
 dispStr = ""
 blinkTime = 0
 wordWrap = 0
+loadingCounter = 0
 wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""]}
+videoImage = ""
+videoBool = True
+videoCount = 0
 
 def grabNewHeadlines():
 	# Init
@@ -163,7 +167,7 @@ def typeSen():
 	#skips sentences that will cause the text to jump on the first line
 	if len(mainStr) >= 17:
 		if mainStr[16] == " ":
-			print("skipping a 16er")
+			#print("skipping a 16er")
 			typeSen()
 	else:
 		return mainStr
@@ -175,49 +179,61 @@ def updateText():
 	global mainStr
 	global blinkTime
 	global wordWrap
-	if counter >= len(mainStr):
-		#this blinks the cursor at the end of typing
-		if blinkTime <= 6:
-			if (blinkTime % 2) == 0:
-				dispStr = dispStr.replace("█", "")
-				displayText.value = dispStr
-				blinkTime += 1
-			else:
-				dispStr = dispStr + "█"
-				displayText.value = dispStr
-				blinkTime += 1
-		else:			
-			mainStr = ""
-			typeSen()
-			counter = 0
-			dispStr = ""
-			displayText.value = ""
-			blinkTime = 0
-			wordWrap = 0
+	global loadingCounter
+	global videoCount
+	global videoBool 
+	if videoBool == True:
+		playVideo()
 	else:
-		if wordWrap > 7 and (counter + 8) < len(mainStr):			
-			#if it's been a lot of letters and there's a space, hit return
-			if " " in mainStr[counter]:
-				dispStr = dispStr + "\n"
-				dispStr = dispStr.replace("█", "")
-				dispStr = dispStr + "█"
-				displayText.value = dispStr
-				counter += 1
+		if counter >= len(mainStr):
+			#this blinks the cursor at the end of typing
+			if blinkTime <= 6:
+				if (blinkTime % 2) == 0:
+					dispStr = dispStr.replace("█", "")
+					displayText.value = dispStr
+					blinkTime += 1
+				else:
+					dispStr = dispStr + "█"
+					displayText.value = dispStr
+					blinkTime += 1
+			else:			
+				mainStr = ""
+				typeSen()
+				counter = 0
+				dispStr = ""
+				displayText.value = ""
+				blinkTime = 0
 				wordWrap = 0
-			#if there's been a lot of letter but no space yet, keep typing
+				#plays the loading screen after x number of headlines
+				loadingCounter += 1
+				if loadingCounter >= 10:
+					videoBool = True
+					loadingCounter = 0
+		else:
+			if wordWrap > 7 and (counter + 8) < len(mainStr):			
+				#if it's been a lot of letters and there's a space, hit return
+				if " " in mainStr[counter]:
+					dispStr = dispStr + "\n"
+					dispStr = dispStr.replace("█", "")
+					dispStr = dispStr + "█"
+					displayText.value = dispStr
+					counter += 1
+					wordWrap = 0
+				#if there's been a lot of letter but no space yet, keep typing
+				else:
+					dispStr = dispStr.replace("█", "")
+					dispStr = dispStr + mainStr[counter] + "█"
+					displayText.value = dispStr
+					counter += 1
+					wordWrap += 1
 			else:
 				dispStr = dispStr.replace("█", "")
 				dispStr = dispStr + mainStr[counter] + "█"
 				displayText.value = dispStr
 				counter += 1
 				wordWrap += 1
-		else:
-			dispStr = dispStr.replace("█", "")
-			dispStr = dispStr + mainStr[counter] + "█"
-			displayText.value = dispStr
-			counter += 1
-			wordWrap += 1
-			#print(dispStr)
+				print(dispStr)
+
 
 #checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():
@@ -237,17 +253,64 @@ def titlecase(s):
     return re.sub(
         r"[A-Za-z]+('[A-Za-z]+)?",
         lambda word: word.group(0).capitalize(), s)
+
+#plays the loading screen video
+def playVideo():
+	global videoCount 
+	global videoBool
+	window.show()
+	if videoCount <= 39:
+		videoCount += 1
+		if videoCount == 3 or videoCount == 21 or videoCount == 12:
+			picture.value = "images/load1.png"
+			print(videoCount)
+		if videoCount == 6 or videoCount == 24 or videoCount == 15 or videoCount == 33:
+			picture.value = "images/load2.png"
+			print(videoCount)
+		if videoCount == 9 or videoCount == 18 or videoCount == 27 or videoCount == 36:
+			picture.value = "images/load3.png"
+			print(videoCount)
+		if videoCount == 30:
+			picture.value = "images/load4.png"
+			print(videoCount)
+	if videoCount >= 39:
+		videoBool = False
+		window.hide()
+		#displayText.show()
+		videoCount = 0
+		picture.value = "images/load1.png"
+		print("False now", videoCount, videoBool)
 	
 #initiates the GUI
-app = App(title="Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
+app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
+
+#sets full screen
+#app.set_full_screen()
+
+#window for video 
+window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
+picture = Picture(window, image="images/load1.png", grid = [0, 0])
+
+#window properties 
+window.hide()
+#window.full_screen = True
 
 #sets the logo
-logo = Picture(app, image="logo.png", grid = [1, 1])
+logo = Picture(app, image="images/logo.png", grid = [1, 3])
 logo.tk.config(bd = 0, cursor = "none")
 logo.align = "left"
 
+#padding for logo
+top_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 0])
+bottom_pad = Box(app, align = "left", height = 40, width = 5, grid = [1, 2])
+left_pad = Box(app, align = "left", height = 30, width = 45, grid = [0, 0])
+
+#top_pad.bg = "#ffffff"
+#bottom_pad.bg = "red"
+#left_pad.bg = "YELLOW"
+
 #main text display 
-displayText = TextBox(app, text = "", multiline = True, grid = [1, 3])
+displayText = TextBox(app, text = "", multiline = True, grid = [1, 1])
 
 #textBox properties 
 displayText.font = "GT America Mono"
@@ -255,13 +318,8 @@ displayText.text_color = "#00ff00"
 displayText.text_size = 50
 displayText.align = "left"
 displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
-displayText.height = 8
+displayText.height = 5
 displayText.width = 16
-
-#padding for logo
-top_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 0])
-bottom_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 2])
-left_pad = Box(app, align = "left", height = 30, width = 45, grid = [0, 0])
 
 #calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
 app.repeat(200, updateText)
@@ -274,9 +332,6 @@ app.repeat(7200000, fetchNew)
 checkAge()
 getAllTypes()
 typeSen()
-
-#sets full screen
-#app.set_full_screen()
 
 #this is the main GUI loop
 app.display()
