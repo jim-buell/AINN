@@ -3,6 +3,7 @@ committee
 riot 
 road 
 Asking 
+ 
 news conference 
 rollout 
 air 
@@ -19,10 +20,8 @@ couple
 test case 
 official 
 lie 
-Video 
 family 
 problem 
-Video 
 committee 
 election fraud conspiracy 
 Analysis 
@@ -53,7 +52,6 @@ singer
 undersea cable 
 repair 
 NZ 
-quasi-state 
 emergency 
 U.S 
 Car 

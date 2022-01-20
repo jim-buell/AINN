@@ -331,7 +331,7 @@ displayText = TextBox(app, text = "", multiline = True, grid = [1, 1])
 #textBox properties 
 displayText.font = "GT America Mono"
 displayText.text_color = "#00ff00"
-displayText.text_size = 50
+displayText.text_size = 39
 displayText.align = "left"
 displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
 displayText.height = 5
