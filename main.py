@@ -19,7 +19,7 @@ dispStr = ""
 blinkTime = 0
 wordWrap = 0
 loadingCounter = 0
-wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""]}
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""]}
 videoImage = ""
 videoBool = True
 videoCount = 0
@@ -88,6 +88,8 @@ def grabNewHeadlines():
 def sortAndStore(part):
 	
 	typeList = []
+	#add names of any static files here. Also add them to the global wordDict dictionary 
+	staticFiles = ["verbTrans", "ideo"]
 	#open the file with the Headlines and put them in a str
 	File = open(r"newHeadlines.txt", "r")
 	headlineStrs = ""
@@ -117,7 +119,7 @@ def sortAndStore(part):
 	File.close()
 	
 	#loads static words stored in files
-	if "verbTrans" not in part:
+	if not any(x in part for x in staticFiles):
 		overWrite = "w"
 		f = open("words/{}.txt".format(part), "{}".format(overWrite))
 		for element in typeList:
@@ -132,7 +134,7 @@ def sortAndStore(part):
 			f.close()
 	
 	#add words to global wordDict
-	if "verbTrans" in part:
+	if any(x in part for x in staticFiles):
 		wordDict["{}".format(part)] = []
 		edgeFile = open("words/{}.txt".format(part), "r")
 		listTemp = edgeFile.readlines()
