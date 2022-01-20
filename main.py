@@ -10,6 +10,7 @@ import random
 from guizero import App, TextBox, Picture, Box, Window
 import time
 import re
+import feedparser
 
 #global variables that persist to facilitate GUI display refresh
 mainStr = ""
@@ -42,6 +43,19 @@ def grabNewHeadlines():
 						headlineList.append(f"{articles['title']}.")
 					else:
 						headlineList.append(f"{articles['title']}.")
+	# Grab headlines from RSS feeds					
+	rssNames = ["https://www.japantimes.co.jp/feed"]
+	for item in rssNames:
+		rssSources='{}'.format(item)
+		rssHeadlines = feedparser.parse(rssSources)
+
+	Headlines = rssHeadlines['entries']
+	if Headlines:
+			for entries in Headlines:
+				if "news" in (entries['title']).lower():
+					headlineList.append(f"{entries['title']}.")
+				else:
+					headlineList.append(f"{entries['title']}.")
 	print(headlineList)
 	
 	#record time of headline fetch in milliseconds from epoch
