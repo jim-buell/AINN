@@ -118,7 +118,7 @@ def sortAndStore(part):
 		typeList += typeNames
 	File.close()
 	
-	#loads static words stored in files
+	#overwrites new parts to file
 	if not any(x in part for x in staticFiles):
 		overWrite = "w"
 		f = open("words/{}.txt".format(part), "{}".format(overWrite))
@@ -134,6 +134,7 @@ def sortAndStore(part):
 			f.close()
 	
 	#add words to global wordDict
+	#loads static words stored in files
 	if any(x in part for x in staticFiles):
 		wordDict["{}".format(part)] = []
 		edgeFile = open("words/{}.txt".format(part), "r")
@@ -150,7 +151,7 @@ def sortAndStore(part):
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "NN", "NNP", "verbTrans"]
+	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo"]
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
@@ -168,14 +169,17 @@ def getword(wordType):
 	
 #function that picks a sentence structure and then grabs random words to form a sentence
 def typeSen():
-	#sentence structures 
-	struct1 = ["NN", "verbTrans", "JJ", "NN"]
-	struct2 = ["NN", "verbTrans", "NN"]
-	struct3 = ["NNP", "verbTrans", "JJ", "NN"]
-	struct4 = ["NNP", "verbTrans", "NN"]
-	struct5 = ["NNP", "verbTrans", "NNP"]
+	#sentence parts
+	senParts = ["NN", "NNP", "ideo"]
 	
-	allSentences = [struct1, struct2, struct3, struct4, struct5]
+	#sentence structures 
+	struct1 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
+	struct2 = ["{}".format(senParts), "verbTrans", "JJ", "{}".format(senParts)]
+	struct3 = [ "JJ", "{}".format(senParts), "verbTrans", "JJ", "{}".format(senParts)]
+	struct4 = [ "JJ", "{}".format(senParts), "verbTrans", "{}".format(senParts)]
+	
+	allSentences = [struct1]
+	print(struct1)
 	
 	#add words to the main string.
 	global mainStr
@@ -284,29 +288,24 @@ def playVideo():
 		videoCount += 1
 		if videoCount == 3 or videoCount == 21 or videoCount == 12:
 			picture.value = "images/load1.png"
-			print(videoCount)
 		if videoCount == 6 or videoCount == 24 or videoCount == 15 or videoCount == 33:
 			picture.value = "images/load2.png"
-			print(videoCount)
 		if videoCount == 9 or videoCount == 18 or videoCount == 27 or videoCount == 36:
 			picture.value = "images/load3.png"
-			print(videoCount)
 		if videoCount == 30:
 			picture.value = "images/load4.png"
-			print(videoCount)
 	if videoCount >= 39:
 		videoBool = False
 		window.hide()
 		#displayText.show()
 		videoCount = 0
 		picture.value = "images/load1.png"
-		print("False now", videoCount, videoBool)
 	
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 
 #sets full screen
-app.set_full_screen()
+#app.set_full_screen()
 
 #window for video 
 window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
@@ -314,7 +313,7 @@ picture = Picture(window, image="images/load1.png", grid = [0, 0])
 
 #window properties 
 window.hide()
-window.full_screen = True
+#window.full_screen = True
 
 #sets the logo
 logo = Picture(app, image="images/logo.png", grid = [1, 3])
