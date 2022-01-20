@@ -301,7 +301,7 @@ def playVideo():
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 
 #sets full screen
-#app.set_full_screen()
+app.set_full_screen()
 
 #window for video 
 window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
@@ -309,7 +309,7 @@ picture = Picture(window, image="images/load1.png", grid = [0, 0])
 
 #window properties 
 window.hide()
-#window.full_screen = True
+window.full_screen = True
 
 #sets the logo
 logo = Picture(app, image="images/logo.png", grid = [1, 3])
