@@ -44,7 +44,7 @@ def grabNewHeadlines():
 					else:
 						headlineList.append(f"{articles['title']}.")
 	# Grab headlines from RSS feeds					
-	rssNames = ["https://www.japantimes.co.jp/feed"]
+	rssNames = ["https://www.japantimes.co.jp/feed"] #, https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml
 	for item in rssNames:
 		rssSources='{}'.format(item)
 		rssHeadlines = feedparser.parse(rssSources)
@@ -122,6 +122,8 @@ def sortAndStore(part):
 		f = open("words/{}.txt".format(part), "{}".format(overWrite))
 		for element in typeList:
 			newStr = element.strip("'")
+			newStr = element.strip("‘")
+			newStr = element.strip("’")
 			f.write(newStr + " \n")
 		else:
 			f.close()

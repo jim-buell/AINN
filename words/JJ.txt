@@ -7,7 +7,7 @@ needy
 Live 
 equal 
 young 
-big 
+'big 
 serious 
 promoted 
 important 
