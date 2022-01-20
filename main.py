@@ -121,7 +121,7 @@ def sortAndStore(part):
 		overWrite = "w"
 		f = open("words/{}.txt".format(part), "{}".format(overWrite))
 		for element in typeList:
-			newStr = element.strip("'", "’", " ' ", " ‘ ")
+			newStr = element.strip("'", "’", "‘", " ' ", " ‘ ", " ’ ")
 			f.write(newStr + " \n")
 		else:
 			f.close()
