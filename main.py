@@ -306,6 +306,7 @@ def playVideo():
 	
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
+app.tk.config(cursor = "none")
 
 #sets full screen
 #app.set_full_screen()
@@ -316,12 +317,14 @@ picture = Picture(window, image="images/load1.png", grid = [0, 0])
 
 #window properties 
 window.hide()
+window.tk.config(cursor = "none")
 #window.full_screen = True
 
 #sets the logo
 logo = Picture(app, image="images/logo.png", grid = [1, 3])
 logo.tk.config(bd = 0, cursor = "none")
 logo.align = "left"
+logo.tk.config(cursor = "none")
 
 #padding for logo
 top_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 0])
