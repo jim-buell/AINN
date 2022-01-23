@@ -123,13 +123,7 @@ def sortAndStore(part):
 		overWrite = "w"
 		f = open("words/{}.txt".format(part), "{}".format(overWrite))
 		for element in typeList:
-			newStr = element.strip("'")
-			newStr = element.strip("’")
-			newStr = element.strip("‘")
-			newStr = element.strip(" ' ")
-			newStr = element.strip(" ’ ")
-			newStr = element.strip(" ‘ ")
-			f.write(newStr + " \n")
+			f.write(element + " \n")
 		else:
 			f.close()
 	
@@ -146,6 +140,7 @@ def sortAndStore(part):
 		edgeFile.close()
 	else:
 		for element in typeList:
+			print(element)
 			wordDict["{}".format(part)] = []
 			wordDict.update({"{}".format(part): typeList})
 	
