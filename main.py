@@ -11,6 +11,7 @@ from guizero import App, TextBox, Picture, Box, Window
 import time
 import re
 import feedparser
+import pygame
 
 #global variables that persist to facilitate GUI display refresh
 mainStr = ""
@@ -140,7 +141,6 @@ def sortAndStore(part):
 		edgeFile.close()
 	else:
 		for element in typeList:
-			print(element)
 			wordDict["{}".format(part)] = []
 			wordDict.update({"{}".format(part): typeList})
 	
@@ -276,6 +276,13 @@ def titlecase(s):
     return re.sub(
         r"[A-Za-z]+('[A-Za-z]+)?",
         lambda word: word.group(0).capitalize(), s)
+        
+def playWelcome():
+	pygame.mixer.init()
+	pygame.mixer.music.load("audio/chime.wav")
+	pygame.mixer.music.play()
+	while pygame.mixer.music.get_busy() == True:
+		continue
 
 #plays the loading screen video
 def playVideo():
@@ -353,6 +360,7 @@ app.repeat(7200000, fetchNew)
 checkAge()
 getAllTypes()
 typeSen()
+playWelcome()
 
 #this is the main GUI loop
 app.display()
