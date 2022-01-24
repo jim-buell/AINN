@@ -19,9 +19,9 @@ dispStr = ""
 blinkTime = 0
 wordWrap = 0
 loadingCounter = 0
-wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""]}
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""]}
 videoImage = ""
-videoBool = True
+videoBool = False
 videoCount = 0
 ideoOn = False
 
@@ -90,7 +90,7 @@ def sortAndStore(part):
 	
 	typeList = []
 	#add names of any static files here. Also add them to the global wordDict dictionary 
-	staticFiles = ["verbTrans", "ideo", "verbING", "while"]
+	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?"]
 	#open the file with the Headlines and put them in a str
 	File = open(r"newHeadlines.txt", "r")
 	headlineStrs = ""
@@ -146,7 +146,7 @@ def sortAndStore(part):
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while"]
+	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?"]
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
@@ -167,33 +167,37 @@ def typeSen():
 	#sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
 	if ideoOn == True:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "ideo"]
+		proper = ["NNP", "NNP", "NNP", "NNP", "ideo"]
 	else:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP"]
+		proper = ["NNP", "NNP", "NNP", "NNP"]
 	
 	#sentence structures 
-	struct1 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
-	struct2 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", "JJ", "NN"] 
-	struct3 = ["JJ", "NN", "verbTrans",(senParts[random.randrange(0, len(senParts))])]
-	struct4 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
-	struct5 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))]), "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
+	struct1 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
+	struct2 = [(proper[random.randrange(0, len(proper))]), "verbTrans", "JJ", "NN"] 
+	struct3 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (senParts[random.randrange(0, len(senParts))]), "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
+	struct4 = ["is", (proper[random.randrange(0, len(proper))]), "verbING", (proper[random.randrange(0, len(proper))]), "?"]
 	
-	allSentences = [struct1, struct2, struct3, struct4, struct5]
+	allSentences = [struct1, struct2, struct3, struct4]
 	
 	#add words to the main string.
 	global mainStr
 	mainStr = ""
 	wordSeq = allSentences[random.randrange(0, len(allSentences))]
 	for item in wordSeq:
-		mainStr = mainStr + getword("{}".format(item)) + " "
+		if "?" in item:
+			mainStr = mainStr[:-1] + getword("{}".format(item)) + " "
+		else:
+			mainStr = mainStr + getword("{}".format(item)) + " "
 	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
 	#skips sentences that will cause the text to jump on the first line
-	if len(mainStr) >= 17:
-		if mainStr[16] == " ":
-			#print("skipping a 16er")
+	if len(mainStr) >= 16:
+		if mainStr[15] == " " or mainStr[16] == " ":
+			#print("skipping a 15er")
 			typeSen()
-	elif len(mainStr) >= 80:
-		print("String was ", len(mainStr), " long, so skipping.")
+	if len(mainStr) >= 79:
+		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
 		typeSen()
 	else:
@@ -246,7 +250,7 @@ def updateText():
 					displayText.value = dispStr
 					counter += 1
 					wordWrap = 0
-				#if there's been a lot of letter but no space yet, keep typing
+				#if there's been a lot of letters but no space yet, keep typing
 				else:
 					dispStr = dispStr.replace("█", "")
 					dispStr = dispStr + mainStr[counter] + "█"
@@ -259,8 +263,6 @@ def updateText():
 				displayText.value = dispStr
 				counter += 1
 				wordWrap += 1
-				#print(dispStr)
-
 
 #checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():

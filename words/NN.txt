@@ -1,7 +1,11 @@
+direction 
 thriller 
 era 
 threat 
 action 
+patient 
+wife 
+keep ventilator 
 committee 
 attorney 
 chairman 
@@ -9,42 +13,46 @@ use
 export control damage 
 flirtation anti-insurrection law 
 insurrection 
-city 
-protest 
 start 
 world 
 fix 
 adventurer 
 row 
 solo 
-history 
+founder 
+extradition 
+Country 
+life 
+wave 
+Video 
 Analysis 
 pressure 
 invasion 
-anti-vaccine speech 
-home 
-homicide 
-troop 
+Analysis 
+model handle 
+mess 
 season 
 defiance 
 mask mandate 
-committee 
-plan 
-Video 
-staff 
-embassy 
-force 
-response 
+wave 
+cruise 
+kind 
+mask wear 
+expert 
 Opinion 
-Putin 
-mud 
+hurdle 
+appeal 
+extradition 
+volcano 
+% 
+population 
+fall tsunami 
+president 
+investigate 'Muslimness claim 
 fashion designer 
 Man 
 girl 
 ban 
-palace 
-win ranking title 
-bomber 
 Ukraine 
 staff 
 Auschwitz 
@@ -52,52 +60,54 @@ tourist
 death camp 
 plane wheel 
 airport 
-dig 
-conference title 
+piece 
+puzzle 
+season 
+level claim title 
+omicron 
+business continuity 
+focus 
+election result boost ruling coalition 
+movement 
+sector 
+crunch 
+exit 
+war risk 
+vessel 
+aid 
+border closure 
+business lobby chief 
+lament 
+city 
+health 
+dream war 
+tracker 
+post record 
+control 
+account election 
+air 
+burden 
+fight 
+year 
+school 
+quarterfinal 
+firm bring home faux bacon 
+alliance week 
+attack 
+hospital halt 
+report 
+presence 
 focus 
 arrival 
+opposition 
+mine 
+push 
+market 
+dig 
+conference title 
 office 
 stealth marketing operation 
 court rule 
 founder 
 extradition case 
 vaccine 
-Cleanup 
-plant 
-coolant 
-war risk 
-week 
-future 
-team 
-investment 
-market 
-weapon tech war 
-gig 
-crash course curriculum creation 
-alliance week 
-dream war 
-sector 
-crunch 
-exit 
-fall 
-energy security risk 
-space 
-news 
-sofa 
-cat 
-friend 
-mayor 
-base transfer rival 
-neighborhood 
-cluster 
-loom 
-boycott 
-debt relief 
-trade war 
-approval rating 
-% 
-case 
-promotion 
-championship 
-Xi 
-title 
