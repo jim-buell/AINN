@@ -19,10 +19,11 @@ dispStr = ""
 blinkTime = 0
 wordWrap = 0
 loadingCounter = 0
-wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""]}
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""]}
 videoImage = ""
 videoBool = True
 videoCount = 0
+ideoOn = False
 
 def grabNewHeadlines():
 	# Init
@@ -89,7 +90,7 @@ def sortAndStore(part):
 	
 	typeList = []
 	#add names of any static files here. Also add them to the global wordDict dictionary 
-	staticFiles = ["verbTrans", "ideo"]
+	staticFiles = ["verbTrans", "ideo", "verbING", "while"]
 	#open the file with the Headlines and put them in a str
 	File = open(r"newHeadlines.txt", "r")
 	headlineStrs = ""
@@ -145,7 +146,7 @@ def sortAndStore(part):
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo"]
+	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while"]
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
@@ -164,15 +165,19 @@ def getword(wordType):
 #function that picks a sentence structure and then grabs random words to form a sentence
 def typeSen():
 	#sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
-	senParts = ["NN", "NNP", "NNP", "NNP", "ideo"]
+	if ideoOn == True:
+		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "ideo"]
+	else:
+		senParts = ["NN", "NNP", "NNP", "NNP", "NNP"]
 	
 	#sentence structures 
 	struct1 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
 	struct2 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", "JJ", "NN"] 
 	struct3 = ["JJ", "NN", "verbTrans",(senParts[random.randrange(0, len(senParts))])]
 	struct4 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
+	struct5 = [(senParts[random.randrange(0, len(senParts))]), "verbTrans", (senParts[random.randrange(0, len(senParts))]), "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
 	
-	allSentences = [struct1, struct2, struct3, struct4]
+	allSentences = [struct1, struct2, struct3, struct4, struct5]
 	
 	#add words to the main string.
 	global mainStr
@@ -278,7 +283,7 @@ def titlecase(s):
         
 def playWelcome():
 	#pygame.mixer.music.load("audio/chime.wav")
-
+	reutrn: null
 
 #plays the loading screen video
 def playVideo():
