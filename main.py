@@ -11,7 +11,6 @@ from guizero import App, TextBox, Picture, Box, Window
 import time
 import re
 import feedparser
-import pygame
 
 #global variables that persist to facilitate GUI display refresh
 mainStr = ""
@@ -278,11 +277,8 @@ def titlecase(s):
         lambda word: word.group(0).capitalize(), s)
         
 def playWelcome():
-	pygame.mixer.init()
-	pygame.mixer.music.load("audio/chime.wav")
-	pygame.mixer.music.play()
-	while pygame.mixer.music.get_busy() == True:
-		continue
+	#pygame.mixer.music.load("audio/chime.wav")
+
 
 #plays the loading screen video
 def playVideo():
@@ -360,7 +356,7 @@ app.repeat(7200000, fetchNew)
 checkAge()
 getAllTypes()
 typeSen()
-playWelcome()
+#playWelcome()
 
 #this is the main GUI loop
 app.display()
