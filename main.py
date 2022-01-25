@@ -333,7 +333,7 @@ logo.tk.config(cursor = "none")
 
 #padding for logo
 top_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 0])
-bottom_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 2])
+bottom_pad = Box(app, align = "left", height = 15, width = 5, grid = [1, 2])
 left_pad = Box(app, align = "left", height = 30, width = 45, grid = [0, 0])
 
 #top_pad.bg = "#ffffff"
