@@ -177,8 +177,10 @@ def typeSen():
 	struct2 = [(proper[random.randrange(0, len(proper))]), "verbTrans", "JJ", "NN"] 
 	struct3 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (senParts[random.randrange(0, len(senParts))]), "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
 	struct4 = ["is", (proper[random.randrange(0, len(proper))]), "verbING", (proper[random.randrange(0, len(proper))]), "?"]
+	struct5 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (proper[random.randrange(0, len(proper))])]
+	struct6 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (proper[random.randrange(0, len(proper))])]
 	
-	allSentences = [struct1, struct2, struct3, struct4]
+	allSentences = [struct1, struct2, struct3, struct4, struct5, struct6]
 	
 	#add words to the main string.
 	global mainStr
@@ -196,7 +198,7 @@ def typeSen():
 		if mainStr[15] == " " or mainStr[16] == " ":
 			#print("skipping a 15er")
 			typeSen()
-	if len(mainStr) >= 79:
+	if len(mainStr) >= 75:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
 		typeSen()
