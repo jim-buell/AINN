@@ -314,6 +314,7 @@ def playVideo():
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 app.tk.config(cursor = "none")
+app.full_screen = True
 
 #sets full screen
 app.set_full_screen()
