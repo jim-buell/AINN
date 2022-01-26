@@ -21,7 +21,8 @@ wordWrap = 0
 loadingCounter = 0
 wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""]}
 videoImage = ""
-videoBool = True
+# True loads video on startup. 
+videoBool = False
 videoCount = 0
 ideoOn = False
 
@@ -190,7 +191,10 @@ def typeSen():
 		if "?" in item:
 			mainStr = mainStr[:-1] + getword("{}".format(item)) + " "
 		else:
-			mainStr = mainStr + getword("{}".format(item)) + " "
+			addMe = getword("{}".format(item)) + " "
+			if len(addMe) >= 16:
+				addMe = getword("{}".format(item)) + " "
+			mainStr = mainStr + addMe
 	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
 	#skips sentences that will cause the text to jump on the first line
@@ -198,7 +202,7 @@ def typeSen():
 		if mainStr[15] == " " or mainStr[16] == " ":
 			#print("skipping a 15er")
 			typeSen()
-	if len(mainStr) >= 75:
+	if len(mainStr) >= 70:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
 		typeSen()
