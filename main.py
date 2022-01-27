@@ -158,7 +158,7 @@ def fetchNew():
 	print("Fetched new headlines at", time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()))
 
 #gets a random word from a list of specified word types. Pass a str indicating the 
-#part of speech to get that type of word. 
+#part of speech to get that type of word. Returns a single word as str.
 def getword(wordType):
 	nextWord = wordDict["{}".format(wordType)][random.randrange(0, len(wordDict["{}".format(wordType)]))]
 	return nextWord
@@ -191,10 +191,8 @@ def typeSen():
 		if "?" in item:
 			mainStr = mainStr[:-1] + getword("{}".format(item)) + " "
 		else:
-			addMe = getword("{}".format(item)) + " "
-			if len(addMe) >= 16:
-				addMe = getword("{}".format(item)) + " "
-			mainStr = mainStr + addMe
+			addMe = getword("{}".format(item))
+			mainStr = mainStr + addMe  + " "
 	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
 	#skips sentences that will cause the text to jump on the first line
