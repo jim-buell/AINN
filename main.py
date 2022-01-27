@@ -24,10 +24,13 @@ wordWrap = 0
 loadingCounter = 0
 wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""]}
 videoImage = ""
-# True loads video on startup. 
-videoBool = False
 videoCount = 0
+
+# Options for video, audio, and names
+# The video option plays the video on startup if True.
+videoBool = True
 ideoOn = False
+soundOn = True
 
 def grabNewHeadlines():
 	# Init
@@ -221,7 +224,6 @@ def updateText():
 	global videoCount
 	global videoBool 
 	if videoBool == True:
-		playSound()
 		playVideo()
 	else:
 		if counter >= len(mainStr):
@@ -299,6 +301,10 @@ def playWelcome():
 def playVideo():
 	global videoCount 
 	global videoBool
+	global soundOn
+	if soundOn == True:
+		if videoCount == 1:
+			playSound()
 	window.show()
 	if videoCount <= 39:
 		videoCount += 1
@@ -318,10 +324,9 @@ def playVideo():
 		picture.value = "images/load1.png"
 	
 # plays the	startup chime
-def playSound():
-    
+def playSound():    
     mixer.init()
-    sound = mixer.Sound("/audio/chime.ogg")
+    sound = mixer.Sound("audio/chime.ogg")
     sound.play()
     
 #initiates the GUI

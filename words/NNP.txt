@@ -4,14 +4,14 @@ West
 Breyer 
 Biden 
 Breyer 
-A 
 Supreme Court 
 Justice Stephen G. Breyer 
 Supreme Court 
 Spotify 
 Neil Young 
 Joe Rogan 
-Ukraine Russia 
+Ukraine 
+Russia 
 Breyer 
 Justice Stephen Breyer 
 Supreme Court 
@@ -41,12 +41,13 @@ Neil Young
 Joe Rogan 
 US 
 Texas 
-Virginia Giuffre Prince Andrew 
+Virginia Giuffre 
+Andrew 
 US 
-Sue Gray 
+Sue Gray No 
 Starmer 
 PM 
-Russia Ukraine US 
+US 
 Moscow 
 San Jose 
 COVID-19 
@@ -81,7 +82,8 @@ Peng Shuai Beijing Olympics
 Japan 
 U.S. 
 Barry Bonds 
-Baseball Hall Fame 
+Baseball Hall 
+Fame 
 North Korea 
 Japan ¥10 
 Omicron 
@@ -90,7 +92,7 @@ Moderna
 Marubeni 
 Gavilon 
 Viterra 
-Dean Fujioka 
+Fujioka 
 World 
 Director 
 U.S. 
