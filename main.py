@@ -11,6 +11,9 @@ from guizero import App, TextBox, Picture, Box, Window
 import time
 import re
 import feedparser
+import os
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
+from pygame import mixer
 
 #global variables that persist to facilitate GUI display refresh
 mainStr = ""
@@ -218,6 +221,7 @@ def updateText():
 	global videoCount
 	global videoBool 
 	if videoBool == True:
+		playSound()
 		playVideo()
 	else:
 		if counter >= len(mainStr):
@@ -313,6 +317,13 @@ def playVideo():
 		videoCount = 0
 		picture.value = "images/load1.png"
 	
+# plays the	startup chime
+def playSound():
+    
+    mixer.init()
+    sound = mixer.Sound("/audio/chime.ogg")
+    sound.play()
+    
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 app.tk.config(cursor = "none")
