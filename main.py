@@ -388,7 +388,7 @@ app.repeat(200, updateText)
 app.repeat(7200000, fetchNew)
 
 #plays sound with video every 20 minutes
-#app.repeat(1200000, soundTimer)
+app.repeat(1200000, soundTimer)
 
 #startup sequences
 #checks if new headlines needed on startup, loads words, and sets the initial sentence
