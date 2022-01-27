@@ -27,10 +27,16 @@ videoImage = ""
 videoCount = 0
 
 # Options for video, audio, and names
-# The video option plays the video on startup if True.
+#——————————————————————————————————————————————————————
+	# The video option plays the video on startup if True.
 videoBool = True
+
+	#Puts IDEO names into word list 
 ideoOn = False
-soundOn = False
+
+	#Turns sound on at start if true. Will play sound every 20 minutes either way.
+soundOn = True
+#——————————————————————————————————————————————————————
 
 def grabNewHeadlines():
 	# Init
@@ -301,6 +307,7 @@ def playVideo():
 	if soundOn == True:
 		if videoCount == 1:
 			playSound()
+			soundOn == False
 	window.show()
 	if videoCount <= 39:
 		videoCount += 1
@@ -324,6 +331,10 @@ def playSound():
     mixer.init()
     sound = mixer.Sound("audio/chime.ogg")
     sound.play()
+    
+def soundTimer():
+	global soundOn
+	sound0n = True
     
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
@@ -374,6 +385,9 @@ app.repeat(200, updateText)
 
 #gets new headlines every 2 hours
 app.repeat(7200000, fetchNew)
+
+#plays sound with video every 20 minutes
+app.reapeat(1200000, soundTimer)
 
 #startup sequences
 #checks if new headlines needed on startup, loads words, and sets the initial sentence
