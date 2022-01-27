@@ -30,7 +30,7 @@ videoCount = 0
 # The video option plays the video on startup if True.
 videoBool = True
 ideoOn = False
-soundOn = True
+soundOn = False
 
 def grabNewHeadlines():
 	# Init
@@ -293,10 +293,6 @@ def titlecase(s):
         r"[A-Za-z]+('[A-Za-z]+)?",
         lambda word: word.group(0).capitalize(), s)
         
-def playWelcome():
-	#pygame.mixer.music.load("audio/chime.wav")
-	reutrn: null
-
 #plays the loading screen video
 def playVideo():
 	global videoCount 
@@ -323,7 +319,7 @@ def playVideo():
 		videoCount = 0
 		picture.value = "images/load1.png"
 	
-# plays the	startup chime
+#plays the startup chime
 def playSound():    
     mixer.init()
     sound = mixer.Sound("audio/chime.ogg")
@@ -384,7 +380,7 @@ app.repeat(7200000, fetchNew)
 checkAge()
 getAllTypes()
 typeSen()
-#playWelcome()
+playSound()
 
 #this is the main GUI loop
 app.display()
