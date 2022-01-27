@@ -307,7 +307,6 @@ def playVideo():
 	if soundOn == True:
 		if videoCount == 1:
 			playSound()
-			soundOn == False
 	window.show()
 	if videoCount <= 39:
 		videoCount += 1
@@ -331,6 +330,7 @@ def playSound():
     mixer.init()
     sound = mixer.Sound("audio/chime.ogg")
     sound.play()
+    soundOn = False
     
 def soundTimer():
 	global soundOn
