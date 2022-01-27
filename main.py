@@ -326,15 +326,16 @@ def playVideo():
 		picture.value = "images/load1.png"
 	
 #plays the startup chime
-def playSound():    
-    mixer.init()
-    sound = mixer.Sound("audio/chime.ogg")
-    sound.play()
-    soundOn = False
+def playSound():
+	global soundOn
+	mixer.init()
+	sound = mixer.Sound("audio/chime.ogg")
+	sound.play()
+	soundOn = False
     
 def soundTimer():
 	global soundOn
-	sound0n = True
+	soundOn = True
     
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
@@ -387,7 +388,7 @@ app.repeat(200, updateText)
 app.repeat(7200000, fetchNew)
 
 #plays sound with video every 20 minutes
-app.repeat(1200000, soundTimer)
+#app.repeat(1200000, soundTimer)
 
 #startup sequences
 #checks if new headlines needed on startup, loads words, and sets the initial sentence

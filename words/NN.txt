@@ -36,6 +36,8 @@ timeline
 pick 
 process 
 shortlist 
+disaster 
+youth sue cancer 
 woman 
 shirt 
 rioter 
@@ -45,10 +47,24 @@ gun
 synagogue siege 
 Prince 
 jury trial 
-report 
 Ukraine 
 response crisis 
 liability 
+qualifying event 
+link 
+crisis 
+frenzy 
+court 
+clash 
+day 
+Student 
+leak 
+university entrance 
+question 
+tennis ace 
+title 
+summit 
+influence 
 antibody 
 omicron 
 cloud outlook 
@@ -56,24 +72,20 @@ pay
 world 
 word 
 silent 
+spirit reach 
 research 
 president fire 
 book 
 writer 
 ramp flight service 
 anything 
-link 
-crisis 
 passenger 
-court 
-clash 
 computer chip shortage 
 conflict 
 firm cooperate 
 reactor 
 praise 
 slugger 
-frenzy 
 path 
 fusion energy 
 innovation fund 
@@ -82,18 +94,3 @@ subvariant
 trial 
 booster shot 
 sale 
-passion project 
-muddle 
-youth 
-security 
-designer 
-kind 
-cool 
-minister 
-internet 
-cyber 
-cover preimplantation fertility 
-insurance 
-unit 
-liquidation 
-court 
