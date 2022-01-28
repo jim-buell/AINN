@@ -152,6 +152,15 @@ def sortAndStore(part):
 			edgeList.append(item.strip())
 		wordDict.update({"{}".format(part): edgeList})
 		edgeFile.close()
+	if part == "NN":
+		for index, item in enumerate(typeList):
+			#replaces any multi-word noun with []. Then removes all [] from list.
+			if " " in item:
+				typeList[index] = []
+				newList = list(filter(lambda x: x, typeList))
+		wordDict["{}".format(part)] = []
+		wordDict.update({"{}".format(part): newList})
+		print(wordDict["NN"])
 	else:
 		for element in typeList:
 			wordDict["{}".format(part)] = []
