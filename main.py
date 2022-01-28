@@ -34,7 +34,8 @@ videoBool = True
 	#Puts IDEO names into word list 
 ideoOn = False
 
-	#Turns sound on at start if true. Will play sound every 20 minutes either way.
+	#Turns sound on at start if true. videoBool must also be on. 
+	#Will play sound every 20 minutes either way.
 soundOn = True
 #——————————————————————————————————————————————————————
 
@@ -215,12 +216,7 @@ def typeSen():
 			mainStr = mainStr + addMe  + " "
 	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
-	#skips sentences that will cause the text to jump on the first line
-	if len(mainStr) >= 16:
-		if mainStr[15] == " " or mainStr[16] == " ":
-			#print("skipping a 15er")
-			typeSen()
-	if len(mainStr) >= 70:
+	if len(mainStr) >= 68:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
 		typeSen()
@@ -243,14 +239,9 @@ def updateText():
 		if counter >= len(mainStr):
 			#this blinks the cursor at the end of typing
 			if blinkTime <= 6:
-				if (blinkTime % 2) == 0:
-					dispStr = dispStr.replace("█", "")
-					displayText.value = dispStr
-					blinkTime += 1
-				else:
-					dispStr = dispStr + "█"
-					displayText.value = dispStr
-					blinkTime += 1
+				displayText.tk.config(insertofftime = 400)
+				blinkTime += 1
+			#resets everything for next headline
 			else:			
 				mainStr = ""
 				typeSen()
@@ -258,6 +249,7 @@ def updateText():
 				dispStr = ""
 				displayText.value = ""
 				blinkTime = 0
+				displayText.tk.config(insertofftime = 0)
 				wordWrap = 0
 				#plays the loading screen after x number of headlines
 				loadingCounter += 1
@@ -269,21 +261,17 @@ def updateText():
 				#if it's been a lot of letters and there's a space, hit return
 				if " " in mainStr[counter]:
 					dispStr = dispStr + "\n"
-					dispStr = dispStr.replace("█", "")
-					dispStr = dispStr + "█"
 					displayText.value = dispStr
 					counter += 1
 					wordWrap = 0
 				#if there's been a lot of letters but no space yet, keep typing
 				else:
-					dispStr = dispStr.replace("█", "")
-					dispStr = dispStr + mainStr[counter] + "█"
+					dispStr = dispStr + mainStr[counter]
 					displayText.value = dispStr
 					counter += 1
 					wordWrap += 1
 			else:
-				dispStr = dispStr.replace("█", "")
-				dispStr = dispStr + mainStr[counter] + "█"
+				dispStr = dispStr + mainStr[counter]
 				displayText.value = dispStr
 				counter += 1
 				wordWrap += 1
@@ -386,6 +374,10 @@ displayText.text_color = "#00ff00"
 displayText.text_size = 39
 displayText.align = "left"
 displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
+	# Insertion cursor options
+displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertofftime = 0)
+displayText.tk.focus_set()
+
 displayText.height = 5
 displayText.width = 16
 
@@ -403,7 +395,6 @@ app.repeat(1200000, soundTimer)
 checkAge()
 getAllTypes()
 typeSen()
-playSound()
 
 #this is the main GUI loop
 app.display()
