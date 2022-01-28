@@ -39,3 +39,16 @@ charges
 revokes
 dooms
 blocks
+shoots
+covers up
+murders
+infects
+disables
+sues
+hurts
+supports
+withdraws support from
+warns of
+rallies against
+protests
+boycotts

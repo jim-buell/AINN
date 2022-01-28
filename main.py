@@ -22,7 +22,7 @@ dispStr = ""
 blinkTime = 0
 wordWrap = 0
 loadingCounter = 0
-wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""]}
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""], "verbState": [""]}
 videoImage = ""
 videoCount = 0
 
@@ -103,7 +103,7 @@ def sortAndStore(part):
 	
 	typeList = []
 	#add names of any static files here. Also add them to the global wordDict dictionary 
-	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?"]
+	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?", "verbState"]
 	#open the file with the Headlines and put them in a str
 	File = open(r"newHeadlines.txt", "r")
 	headlineStrs = ""
@@ -160,7 +160,6 @@ def sortAndStore(part):
 				newList = list(filter(lambda x: x, typeList))
 		wordDict["{}".format(part)] = []
 		wordDict.update({"{}".format(part): newList})
-		print(wordDict["NN"])
 	else:
 		for element in typeList:
 			wordDict["{}".format(part)] = []
@@ -168,7 +167,7 @@ def sortAndStore(part):
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?"]
+	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?", "verbState"]
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
@@ -200,7 +199,7 @@ def typeSen():
 	struct3 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (senParts[random.randrange(0, len(senParts))]), "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
 	struct4 = ["is", (proper[random.randrange(0, len(proper))]), "verbING", (proper[random.randrange(0, len(proper))]), "?"]
 	struct5 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (proper[random.randrange(0, len(proper))])]
-	struct6 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (proper[random.randrange(0, len(proper))])]
+	struct6 = [(proper[random.randrange(0, len(proper))]), "verbState", "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
 	
 	allSentences = [struct1, struct2, struct3, struct4, struct5, struct6]
 	
