@@ -392,8 +392,8 @@ displayText.width = 16
 #calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
 app.repeat(200, updateText)
 
-#gets new headlines every 2 hours
-app.repeat(7200000, fetchNew)
+#gets new headlines every hour
+app.repeat(3600000, fetchNew)
 
 #plays sound with video every 20 minutes
 app.repeat(1200000, soundTimer)
