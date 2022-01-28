@@ -7,6 +7,7 @@ military
 high 
 future 
 Ukrainian 
+Snow-covered 
 Trump-fueled 
 Ukraine-Russia 
 Live 
@@ -14,7 +15,6 @@ Ukraine-Russia
 Russian 
 Mid-Atlantic 
 right 
-high 
 civil 
 Japanese 
 rare 
@@ -25,13 +25,18 @@ Novak
 Ukraine 
 next 
 cold US-Canada 
-stole 
+central 
+Sky-high natural 
+positive 
+COVID-19 
+military 
 past 
 vote-buying 
 shorten 
 close 
+legal 
+Brazilian 
 global 
-seek 
 second 
 new 
 rapid 
@@ -51,5 +56,3 @@ Top
 COVID-19 
 unlikely 
 open 
-second 
-final 

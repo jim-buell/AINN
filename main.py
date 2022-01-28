@@ -320,6 +320,8 @@ def playVideo():
 		#displayText.show()
 		videoCount = 0
 		picture.value = "images/load1.png"
+		#resets focus to text box so insertion cursor is visible 
+		displayText.tk.focus_set()
 	
 #plays the startup chime
 def playSound():
