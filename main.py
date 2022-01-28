@@ -31,12 +31,15 @@ videoCount = 0
 	# The video option plays the video on startup if True.
 videoBool = True
 
-	#Puts IDEO names into word list 
+	# Puts IDEO names into word list 
 ideoOn = False
 
-	#Turns sound on at start if true. videoBool must also be on. 
-	#Will play sound every 20 minutes either way.
+	# Turns sound on at start if true. videoBool must also be on. 
+	# Will play sound every 20 minutes either way.
 soundOn = True
+
+	# How many headlines play before the video starts
+headlinesInRow = 10
 #——————————————————————————————————————————————————————
 
 def grabNewHeadlines():
@@ -84,7 +87,6 @@ def grabNewHeadlines():
 	f = open("masterHeadlines.txt", "a")
 	for element in headlineList:
 		f.write(element + "\n")
-		#print(element)
 	else:
 		f.close()
 	
@@ -114,7 +116,6 @@ def sortAndStore(part):
 	#print(headlineStrs)
 	stop_words = set(stopwords.words('english'))
 	tokenized = sent_tokenize(headlineStrs)
-	#
 	for i in tokenized:
 		      
 		#Word tokenizers is used to find the words 
@@ -233,9 +234,14 @@ def updateText():
 	global loadingCounter
 	global videoCount
 	global videoBool 
+	global headlinesInRow
 	if videoBool == True:
 		playVideo()
 	else:
+		if counter == 0:
+			displayText.value = ""
+			displayText.tk.config(insertofftime = 0)
+			displayText.tk.focus_force()
 		if counter >= len(mainStr):
 			#this blinks the cursor at the end of typing
 			if blinkTime <= 6:
@@ -243,17 +249,17 @@ def updateText():
 				blinkTime += 1
 			#resets everything for next headline
 			else:			
+				window.tk.focus_force()
 				mainStr = ""
+				displayText.value = ""
 				typeSen()
 				counter = 0
 				dispStr = ""
-				displayText.value = ""
 				blinkTime = 0
-				displayText.tk.config(insertofftime = 0)
 				wordWrap = 0
 				#plays the loading screen after x number of headlines
 				loadingCounter += 1
-				if loadingCounter >= 10:
+				if loadingCounter >= headlinesInRow:
 					videoBool = True
 					loadingCounter = 0
 		else:
@@ -317,7 +323,6 @@ def playVideo():
 	if videoCount >= 39:
 		videoBool = False
 		window.hide()
-		#displayText.show()
 		videoCount = 0
 		picture.value = "images/load1.png"
 		#resets focus to text box so insertion cursor is visible 
@@ -378,7 +383,8 @@ displayText.align = "left"
 displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
 	# Insertion cursor options
 displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertofftime = 0)
-displayText.tk.focus_set()
+#displayText.tk.focus_set()
+displayText.tk.bind("<Key>", "pass")
 
 displayText.height = 5
 displayText.width = 16
