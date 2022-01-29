@@ -48,7 +48,7 @@ def grabNewHeadlines():
 	headlineList = []
 	
 	# Grab headlines from NewsAPI 
-	sourceName = ['the-washington-post', 'CNN', 'BBC-news']
+	sourceName = ['the-washington-post', 'CNN'] #, 'BBC-news']
 	for item in sourceName: 
 		top_headlines = newsapi.get_top_headlines(sources='{}'.format(item))
 
