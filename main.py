@@ -306,10 +306,10 @@ def playVideo():
 	global videoCount 
 	global videoBool
 	global soundOn
+	window.show()
 	if soundOn == True:
 		if videoCount == 1:
 			playSound()
-	window.show()
 	if videoCount <= 39:
 		videoCount += 1
 		if videoCount == 3 or videoCount == 21 or videoCount == 12:
