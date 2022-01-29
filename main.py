@@ -22,7 +22,7 @@ dispStr = ""
 blinkTime = 0
 wordWrap = 0
 loadingCounter = 0
-wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""], "verbState": [""]}
+wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""], "verbState": [""], "demo": [""]}
 videoImage = ""
 videoCount = 0
 
@@ -33,6 +33,9 @@ videoBool = True
 
 	# Puts IDEO names into word list 
 ideoOn = False
+
+	# Puts Demo names into the word list
+demoOn = True
 
 	# Turns sound on at start if true. videoBool must also be on. 
 	# Will play sound every 20 minutes either way.
@@ -106,7 +109,7 @@ def sortAndStore(part):
 	
 	typeList = []
 	#add names of any static files here. Also add them to the global wordDict dictionary 
-	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?", "verbState"]
+	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
 	#open the file with the Headlines and put them in a str
 	File = open(r"newHeadlines.txt", "r")
 	headlineStrs = ""
@@ -169,7 +172,7 @@ def sortAndStore(part):
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
-	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?", "verbState"]
+	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
@@ -191,6 +194,9 @@ def typeSen():
 	if ideoOn == True:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "ideo"]
 		proper = ["NNP", "NNP", "NNP", "NNP", "ideo"]
+	if demoOn == True:
+		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "demo"]
+		proper = ["NNP", "NNP", "NNP", "NNP", "demo"]
 	else:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP"]
 		proper = ["NNP", "NNP", "NNP", "NNP"]
