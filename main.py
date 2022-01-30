@@ -25,6 +25,7 @@ loadingCounter = 0
 wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""], "verbState": [""], "demo": [""]}
 videoImage = ""
 videoCount = 0
+videoFetchOn = False
 
 # Options for video, audio, and names
 #——————————————————————————————————————————————————————
@@ -46,8 +47,6 @@ headlinesInRow = 10
 #——————————————————————————————————————————————————————
 
 def grabNewHeadlines():
-	# Show the loading screen
-	fetchWindow.show()
 	
 	# Init
 	newsapi = NewsApiClient(api_key='2a547104c0d14649850d41b220871320')
@@ -68,7 +67,7 @@ def grabNewHeadlines():
 					else:
 						headlineList.append(f"{articles['title']}.")
 	# Grab headlines from RSS feeds					
-	rssNames = ["https://www.japantimes.co.jp/feed"] #, https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml
+	rssNames = ["https://www.japantimes.co.jp/feed"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
 	for item in rssNames:
 		rssSources='{}'.format(item)
 		rssHeadlines = feedparser.parse(rssSources)
@@ -105,10 +104,6 @@ def grabNewHeadlines():
 		headlineStrs += " "
 	else:
 		f.close()
-	
-	# Close the loading screen	
-	fetchWindow.hide()	
-	
 	return headlineStrs
 
 #categorizes words in headlines into parts of speech and saves them to individual files
@@ -183,11 +178,6 @@ def getAllTypes():
 	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
-
-def fetchNew():
-	grabNewHeadlines()
-	getAllTypes()
-	print("Fetched new headlines at", time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()))
 
 #gets a random word from a list of specified word types. Pass a str indicating the 
 #part of speech to get that type of word. Returns a single word as str.
@@ -319,7 +309,12 @@ def playVideo():
 	global videoCount 
 	global videoBool
 	global soundOn
+	global videoFetchOn
 	window.show()
+	if videoFetchOn == True:
+		print("Getting headling during video")
+		fetchNew()
+		videoFetchOn == False
 	if soundOn == True:
 		if videoCount == 1:
 			playSound()
@@ -340,6 +335,16 @@ def playVideo():
 		picture.value = "images/load1.png"
 		#resets focus to text box so insertion cursor is visible 
 		displayText.tk.focus_set()
+	
+def fetchNew():
+	grabNewHeadlines()
+	getAllTypes()
+	print("Fetched new headlines at", time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()))
+
+# gets called every hour. when true, the fetchNew function runs during video
+def videoFetch():
+	global videoFetchOn
+	videoFetchOn = True	
 	
 #plays the startup chime
 def playSound():
@@ -369,15 +374,6 @@ picture = Picture(window, image="images/load1.png", grid = [0, 0])
 window.hide()
 window.tk.config(cursor = "none")
 window.full_screen = True
-
-#window for fetching screen 
-fetchWindow = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
-fetchPicture = Picture(window, image="images/splash.png", grid = [0, 0])
-
-#fetch screen window properties 
-fetchWindow.hide()
-fetchWindow.tk.config(cursor = "none")
-fetchWindow.full_screen = True
 
 #sets the logo
 logo = Picture(app, image="images/logo.png", grid = [1, 3])
@@ -411,11 +407,11 @@ displayText.tk.bind("<Key>", "pass")
 displayText.height = 5
 displayText.width = 16
 
-#calls updateText repeatedly in the app loop — gets new letters to pass to the GUI
+#calls updateText repeatedly in the app loop — gets new letters to pass to the GUI and runs everything else...
 app.repeat(200, updateText)
 
 #gets new headlines every hour
-app.repeat(3600000, fetchNew)
+app.repeat(3600000, videoFetch)
 
 #plays sound with video every 20 minutes
 app.repeat(1200000, soundTimer)
