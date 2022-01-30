@@ -18,6 +18,10 @@ How cold is it in Miami? It's so cold that 'falling iguanas' are forecast.
 Live updates: Winter storm slams US Northeast.
 Live updates: Winter storm slams US Northeast.
 Nor'easter weather video: 40-70 mph winds to 'wreak havoc' across region - CNN Video.
+<<<<<<< HEAD
+=======
+China pursues gold in global image by hosting Olympics.
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 North Korea ups ante with longest-range missile test since 2017.
 Riot erupts outside Okinawa police station after boy allegedly hit by officer.
 Top LDP executive Sanae Takaichi floats possibility of COVID state of emergency.
@@ -31,7 +35,10 @@ Japan’s bluefin tuna management marred by underreporting of catches.
 Ryoyu Kobayashi captures seventh win of World Cup season.
 Pandemic provides an opportunity to improve access to contraception.
 Mimosa and Pina are a pair of entertaining cats.
+<<<<<<< HEAD
 China pursues gold in global image by hosting Olympics.
+=======
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 ‘No justice’: Northern Ireland marks ‘Bloody Sunday’ amid Brexit backdrop.
 Trucker vaccine rule brings polarizing protest to Canada’s capital.
 NFL great Tom Brady reportedly planning to retire.

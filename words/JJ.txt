@@ -1,18 +1,32 @@
 wicked 
+<<<<<<< HEAD
 beneficiary affirmative 
 single 
 east pro-Moscow 
 covid 
+=======
+affirmative 
+single 
+pro-Moscow 
+— 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 Restaurant 
 presidential 
 'Saturday 
 Russian 
 Irish 
 disrupt 
+<<<<<<< HEAD
 cold 
 Live 
 Live 
 40-70 
+=======
+Live 
+Live 
+40-70 
+global 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 ups 
 hit 
 Top 
@@ -22,9 +36,13 @@ anime
 foreign 
 financial 
 tuna 
+<<<<<<< HEAD
 underreporting 
 seventh win 
 global 
+=======
+seventh 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 great 
 aid 
 climate-vulnerable 

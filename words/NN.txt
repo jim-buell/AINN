@@ -1,12 +1,25 @@
+<<<<<<< HEAD
 bolster 
+=======
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 threat 
 blizzard 
 campaign pressure 
 retire 
 senator 
+<<<<<<< HEAD
 action 
 wake omicron 
 prep 
+=======
+beneficiary 
+action 
+wake 
+omicron wave 
+east 
+prep 
+covid 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 quarantine 
 relief 
 Trump 
@@ -22,21 +35,38 @@ Video
 blizzard 
 snow 
 cold 
+<<<<<<< HEAD
 iguanas forecast 
 storm 
 Northeast 
 storm 
 Northeast 
+=======
+forecast 
+Winter storm 
+Winter storm 
+video 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 mph 
 havoc 
 region 
 Video 
+<<<<<<< HEAD
+=======
+gold 
+image 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 ante longest-range missile test 
 station 
 officer 
 executive 
 possibility 
+<<<<<<< HEAD
 state emergency 
+=======
+state 
+emergency 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 security 
 lack 
 conflict 
@@ -48,12 +78,20 @@ factory activity
 bite 
 bolt 
 management 
+<<<<<<< HEAD
+=======
+underreporting 
+win 
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 season 
 opportunity 
 access contraception 
 pair 
+<<<<<<< HEAD
 gold 
 image 
+=======
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 justice 
 backdrop 
 vaccine rule 
@@ -73,6 +111,9 @@ occupancy rate
 drought win home slam 
 year 
 coup 
+<<<<<<< HEAD
 search 
+=======
+>>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 eruption 
 visit 
