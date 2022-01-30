@@ -1,6 +1,5 @@
 #Infinite Scroll 2.0
 
-from newsapi import NewsApiClient
 import nltk
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet as wn
@@ -48,9 +47,7 @@ headlinesInRow = 10
 
 def grabNewHeadlines():
 	
-	# newsapi = NewsApiClient(api_key='2a547104c0d14649850d41b220871320')
 	headlineList = []
-	
 	# Grab headlines from RSS feeds					
 	rssNames = ["http://rss.cnn.com/rss/edition.rss", " https://www.japantimes.co.jp/feed", "http://feeds.washingtonpost.com/rss/national", "http://feeds.washingtonpost.com/rss/world"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
 	for item in rssNames:
