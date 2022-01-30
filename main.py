@@ -299,7 +299,7 @@ def playVideo():
 	if videoFetchOn == True:
 		print("Getting headlines during video")
 		fetchNew()
-		videoFetchOn == False
+		videoFetchOn = False
 	if soundOn == True:
 		if videoCount == 1:
 			playSound()
