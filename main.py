@@ -35,7 +35,7 @@ videoBool = True
 ideoOn = False
 
 	# Puts Demo names into the word list
-demoOn = True
+demoOn = False
 
 	# Turns sound on at start if true. videoBool must also be on. 
 	# Will play sound every 20 minutes either way.
@@ -46,6 +46,9 @@ headlinesInRow = 10
 #——————————————————————————————————————————————————————
 
 def grabNewHeadlines():
+	# Show the loading screen
+	fetchWindow.show()
+	
 	# Init
 	newsapi = NewsApiClient(api_key='2a547104c0d14649850d41b220871320')
 	headlineList = []
@@ -102,6 +105,10 @@ def grabNewHeadlines():
 		headlineStrs += " "
 	else:
 		f.close()
+	
+	# Close the loading screen	
+	fetchWindow.hide()	
+	
 	return headlineStrs
 
 #categorizes words in headlines into parts of speech and saves them to individual files
@@ -362,6 +369,15 @@ picture = Picture(window, image="images/load1.png", grid = [0, 0])
 window.hide()
 window.tk.config(cursor = "none")
 window.full_screen = True
+
+#window for fetching screen 
+fetchWindow = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
+fetchPicture = Picture(window, image="images/splash.png", grid = [0, 0])
+
+#fetch screen window properties 
+fetchWindow.hide()
+fetchWindow.tk.config(cursor = "none")
+fetchWindow.full_screen = True
 
 #sets the logo
 logo = Picture(app, image="images/logo.png", grid = [1, 3])
