@@ -53,32 +53,36 @@ def grabNewHeadlines():
 	headlineList = []
 	
 	# Grab headlines from NewsAPI 
-	sourceName = ['the-washington-post', 'CNN'] #, 'BBC-news']
-	for item in sourceName: 
-		top_headlines = newsapi.get_top_headlines(sources='{}'.format(item))
+#	sourceName = ['the-washington-post', 'CNN'] #, 'BBC-news']
+#	for item in sourceName: 
+#		top_headlines = newsapi.get_top_headlines(sources='{}'.format(item))
 
 		# Format the headlines and remove extra data 
-		Headlines = top_headlines['articles']
-		if Headlines:
-				for articles in Headlines:
+#		Headlines = top_headlines['articles']
+#		if Headlines:
+#				for articles in Headlines:
 					#b = articles['title'][::-1].index("-")
-					if "news" in (articles['title']).lower():
-						headlineList.append(f"{articles['title']}.")
-					else:
-						headlineList.append(f"{articles['title']}.")
+#					if "news" in (articles['title']).lower():
+#						headlineList.append(f"{articles['title']}.")
+#					else:
+#						headlineList.append(f"{articles['title']}.")
 	# Grab headlines from RSS feeds					
-	rssNames = ["https://www.japantimes.co.jp/feed"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
+
+	rssNames = ["http://rss.cnn.com/rss/edition.rss", " https://www.japantimes.co.jp/feed", "http://feeds.washingtonpost.com/rss/national", "http://feeds.washingtonpost.com/rss/world"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
 	for item in rssNames:
+		headlineLimit = 0
 		rssSources='{}'.format(item)
 		rssHeadlines = feedparser.parse(rssSources)
 
-	Headlines = rssHeadlines['entries']
-	if Headlines:
-			for entries in Headlines:
+		Headlines = rssHeadlines['entries']
+		for entries in Headlines:
+			if headlineLimit < 20:
 				if "news" in (entries['title']).lower():
 					headlineList.append(f"{entries['title']}.")
+					headlineLimit += 1
 				else:
 					headlineList.append(f"{entries['title']}.")
+					headlineLimit += 1
 	print(headlineList)
 	
 	#record time of headline fetch in milliseconds from epoch
@@ -312,7 +316,7 @@ def playVideo():
 	global videoFetchOn
 	window.show()
 	if videoFetchOn == True:
-		print("Getting headling during video")
+		print("Getting headlines during video")
 		fetchNew()
 		videoFetchOn == False
 	if soundOn == True:
