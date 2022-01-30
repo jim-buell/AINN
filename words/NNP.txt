@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Britain 
 NATO 
 Russia 
@@ -94,39 +95,21 @@ LDP
 Sanae Takaichi 
 COVID 
 Lawsuits 
+=======
+Marcelo Claure 
+SoftBank 
+Nissan 
+Renault Mitsubishi Commit Electric Cars 
+Company Joins March Back Moon 
+>>>>>>> 5da6bade9670a08be4a95e672f0f5924d13ace9a
 Japan 
-China 
-COVID-era 
-Kochi 
-China January 
-COVID-19 
-Japan 
-Japan 
-Ryoyu Kobayashi 
-World Cup 
-Pandemic 
-Mimosa Pina 
-Northern Ireland 
-Bloody Sunday 
-Brexit 
-Trucker 
-Canada 
-NFL 
-Tom Brady 
-Enter kaleidoscopic 
-Ko Machida 
-Tokyo 
-Seibu Ikebukuro Line 
-Japan 
-Tonga COVID-19 
-Japan-funded 
-Bangladesh 
-Beijing 
-Peng Shuai 
-Hong Kong 
-COVID-19 
+Covid-19 Spreads 
+La reina 
+Love Triangle Challenges Reign 
+Japan Monkey Queen 
 Japan 
 Tokyo 
+<<<<<<< HEAD
 Ash Barty 
 Australia 
 Myanmar 
@@ -138,3 +121,9 @@ Japan
 Number 
 COVID-19 
 Japan 
+=======
+Omicron Naomi Osaka Returns Court Australian Open 
+Sony Moves Toward Electric Car Market 
+New Subsidiary 
+Toyota Topped G.M 
+>>>>>>> 5da6bade9670a08be4a95e672f0f5924d13ace9a

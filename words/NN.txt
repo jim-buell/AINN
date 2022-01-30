@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 bolster 
 =======
 >>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
@@ -117,3 +118,11 @@ search
 >>>>>>> 41b676111c5ef31e37fa9b1ef34810a02813ca76
 eruption 
 visit 
+=======
+desafío su reinado 
+la 
+quasi-state 
+emergency 
+U.S 
+Car 
+>>>>>>> 5da6bade9670a08be4a95e672f0f5924d13ace9a

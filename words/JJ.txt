@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 wicked 
 <<<<<<< HEAD
 beneficiary affirmative 
@@ -46,11 +47,9 @@ seventh
 great 
 aid 
 climate-vulnerable 
+=======
+>>>>>>> 5da6bade9670a08be4a95e672f0f5924d13ace9a
 Japanese 
-record 
-COVID-19 
-44-year 
-British 
-mid-February 
-at-home 
-14-fold 
+Right 
+monos 
+un 
