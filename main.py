@@ -48,26 +48,10 @@ headlinesInRow = 10
 
 def grabNewHeadlines():
 	
-	# Init
-	newsapi = NewsApiClient(api_key='2a547104c0d14649850d41b220871320')
+	# newsapi = NewsApiClient(api_key='2a547104c0d14649850d41b220871320')
 	headlineList = []
 	
-	# Grab headlines from NewsAPI 
-#	sourceName = ['the-washington-post', 'CNN'] #, 'BBC-news']
-#	for item in sourceName: 
-#		top_headlines = newsapi.get_top_headlines(sources='{}'.format(item))
-
-		# Format the headlines and remove extra data 
-#		Headlines = top_headlines['articles']
-#		if Headlines:
-#				for articles in Headlines:
-					#b = articles['title'][::-1].index("-")
-#					if "news" in (articles['title']).lower():
-#						headlineList.append(f"{articles['title']}.")
-#					else:
-#						headlineList.append(f"{articles['title']}.")
 	# Grab headlines from RSS feeds					
-
 	rssNames = ["http://rss.cnn.com/rss/edition.rss", " https://www.japantimes.co.jp/feed", "http://feeds.washingtonpost.com/rss/national", "http://feeds.washingtonpost.com/rss/world"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
 	for item in rssNames:
 		headlineLimit = 0
