@@ -35,7 +35,7 @@ videoBool = True
 ideoOn = False
 
 	# Puts Demo names into the word list
-demoOn = True
+demoOn = False
 
 	# Turns sound on at start if true. videoBool must also be on. 
 	# Will play sound every 20 minutes either way.
@@ -223,7 +223,7 @@ def typeSen():
 			mainStr = mainStr + addMe  + " "
 	#mainStr = titlecase(mainStr)
 	mainStr = mainStr.upper()
-	if len(mainStr) >= 68:
+	if len(mainStr) >= 65:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
 		typeSen()
@@ -269,7 +269,7 @@ def updateText():
 					videoBool = True
 					loadingCounter = 0
 		else:
-			if wordWrap > 7 and (counter + 8) < len(mainStr):			
+			if wordWrap > 8 and (counter + 7) < len(mainStr):			
 				#if it's been a lot of letters and there's a space, hit return
 				if " " in mainStr[counter]:
 					dispStr = dispStr + "\n"
