@@ -216,6 +216,8 @@ def typeSen():
 		print("The long string was: ", mainStr)
 		typeSen()
 	else:
+		# TESTING 
+		mainStr = "0123456789012345 01234567890123453"
 		return mainStr
 
 #function that updates the display, scrolls the text and calls the sentence creator when finished
@@ -236,14 +238,7 @@ def updateText():
 			displayText.value = ""
 			displayText.tk.config(insertofftime = 0)
 			displayText.tk.focus_force()
-		if counter >= len(mainStr):
-			# Checks if cursor is at the end of a line and pushes it to next line if so
-			# Ensures there isn't this weird tiny cursor stuck after the headline ends
-			# If it's the last character of the last line, it leave the little cursor there				
-			if "16" in displayText.tk.index(tkinter.INSERT):
-				if not displayText.tk.index(tkinter.INSERT) == "5.16":
-					dispStr = dispStr + "\n"
-					displayText.value = dispStr			
+		if counter >= len(mainStr):	
 			#this blinks the cursor at the end of typing
 			if blinkTime <= 6:
 				displayText.tk.config(insertofftime = 400)
@@ -400,7 +395,8 @@ displayText.font = "GT America Mono"
 displayText.text_color = "#00ff00"
 displayText.text_size = 39
 displayText.align = "left"
-displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
+displayText.tk.grid(ipadx = 30)
+displayText.tk.config(cursor = "none", highlightbackground = "#ffffff", bd = 0)
 	# Insertion cursor options
 displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertofftime = 0)
 #displayText.tk.focus_set()
