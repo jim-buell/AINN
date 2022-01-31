@@ -6,17 +6,18 @@ election
 world know 
 missile 
 month 
-missile 
-visit 
-country 
-fisherman 
-Snowfall 
-region 
-wind 
-currency 
-laugh 
+blackmail 
 loyalty 
 response 
+missile 
+visit 
+face 
+fisherman 
+currency 
+metro 
+panic festive 
+country 
+work 
 account 
 jet 
 title 
@@ -24,15 +25,15 @@ diver
 mission 
 misinformation 
 music 
-country 
-work 
-defense 
-self-isolation 
+family attorney 
+plea deal 
+hate crime 
+murder 
 cyclone storm 
 world 
 living land animal 
 age 
-tortoise 
+blizzard 
 cyclone 
 extreme snow wind 
 hate spiking 
@@ -55,12 +56,15 @@ son
 doctor 
 hand 
 family 
+face 
+meeting 
 tango partner 
 quit 
 pastor 
 child 
 abuse 
-message panic 
+face 
+meeting 
 tango partner 
 quit 
 pastor 
@@ -69,7 +73,6 @@ abuse
 message panic 
 antsy 
 exercise 
-disrupt 
 week 
 threat Ukraine 
 longest-range missile 
@@ -87,4 +90,3 @@ sea reunite mother
 version 
 president 
 crisis 
-administration 

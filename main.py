@@ -216,8 +216,6 @@ def typeSen():
 		print("The long string was: ", mainStr)
 		typeSen()
 	else:
-		# TESTING 
-		mainStr = "0123456789012345 01234567890123453"
 		return mainStr
 
 #function that updates the display, scrolls the text and calls the sentence creator when finished
@@ -396,7 +394,7 @@ displayText.text_color = "#00ff00"
 displayText.text_size = 39
 displayText.align = "left"
 displayText.tk.grid(ipadx = 30)
-displayText.tk.config(cursor = "none", highlightbackground = "#ffffff", bd = 0)
+displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
 	# Insertion cursor options
 displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertofftime = 0)
 #displayText.tk.focus_set()
