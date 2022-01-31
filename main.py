@@ -33,7 +33,7 @@ videoFetchOn = False
 # ——————————————————————————————————————————————————————
 
 	# The video option plays the video on startup if True.
-videoBool = False
+videoBool = True
 
 	# Puts IDEO names into word list 
 ideoOn = False
@@ -43,7 +43,7 @@ demoOn = False
 
 	# Turns sound on at start if true. videoBool must also be on. 
 	# Will play sound every 20 minutes either way.
-soundOn = False
+soundOn = True
 
 	# How many headlines play before the video starts
 headlinesInRow = 10
