@@ -14,7 +14,9 @@ import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 from pygame import mixer
 
-#global variables that persist to facilitate GUI display refresh
+# Global variables that persist to facilitate GUI display refresh
+# ——————————————————————————————————————————————————————
+
 mainStr = ""
 counter = 0
 dispStr = ""
@@ -27,7 +29,8 @@ videoCount = 0
 videoFetchOn = False
 
 # Options for video, audio, and names
-#——————————————————————————————————————————————————————
+# ——————————————————————————————————————————————————————
+
 	# The video option plays the video on startup if True.
 videoBool = True
 
@@ -43,7 +46,9 @@ soundOn = True
 
 	# How many headlines play before the video starts
 headlinesInRow = 10
-#——————————————————————————————————————————————————————
+
+# Functions 
+# ——————————————————————————————————————————————————————
 
 def grabNewHeadlines():
 	
@@ -74,11 +79,11 @@ def grabNewHeadlines():
 	f.close()
 	
 	#append headlines to master file
-	f = open("masterHeadlines.txt", "a")
-	for element in headlineList:
-		f.write(element + "\n")
-	else:
-		f.close()
+#	f = open("masterHeadlines.txt", "a")
+#	for element in headlineList:
+#		f.write(element + "\n")
+#	else:
+#		f.close()
 	
 	#overwrite new headlines to new headline file
 	headlineStrs = " "
@@ -272,6 +277,7 @@ def updateText():
 
 #checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():
+	global videoFetchOn
 	f = open(r"elapsedTime.txt", "r")
 	lastTime = int(f.read().rstrip())
 	currentTime = round(time.time() * 1000)
@@ -279,7 +285,7 @@ def checkAge():
 	print("Elapsed time is", round((elapsedTime / 60000)), "minutes.")
 	if elapsedTime >= 3600000:
 		print("Headlines are more than an hour old. Need to get a new set.")
-		fetchNew()
+		videoFetchOn = True
 	else:
 		print("Keeping existing headlines.")
 
@@ -343,6 +349,9 @@ def soundTimer():
 	global soundOn
 	soundOn = True
     
+# GUIzero Properties 
+# ————————————————————————————————————————————————————————————————————————————————————————————————————
+
 #initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 app.tk.config(cursor = "none")
@@ -392,7 +401,10 @@ displayText.tk.bind("<Key>", "pass")
 displayText.height = 5
 displayText.width = 16
 
-#calls updateText repeatedly in the app loop — gets new letters to pass to the GUI and runs everything else...
+# Main loop and scheduled functions
+# ————————————————————————————————————————————————————————————————————————————————————————————————————
+
+# Main Text Loop — Calls updateText repeatedly in the app loop — gets new letters to pass to the GUI and runs everything else...
 app.repeat(200, updateText)
 
 #gets new headlines every hour
