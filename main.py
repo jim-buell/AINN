@@ -33,7 +33,7 @@ videoFetchOn = False
 # ——————————————————————————————————————————————————————
 
 	# The video option plays the video on startup if True.
-videoBool = True
+videoBool = False
 
 	# Puts IDEO names into word list 
 ideoOn = False
@@ -43,7 +43,7 @@ demoOn = False
 
 	# Turns sound on at start if true. videoBool must also be on. 
 	# Will play sound every 20 minutes either way.
-soundOn = True
+soundOn = False
 
 	# How many headlines play before the video starts
 headlinesInRow = 10
@@ -237,10 +237,13 @@ def updateText():
 			displayText.tk.config(insertofftime = 0)
 			displayText.tk.focus_force()
 		if counter >= len(mainStr):
-			# Checks if cursor is at the end of a line and pushes it to next line.
+			# Checks if cursor is at the end of a line and pushes it to next line if so
+			# Ensures there isn't this weird tiny cursor stuck after the headline ends
+			# If it's the last character of the last line, it leave the little cursor there				
 			if "16" in displayText.tk.index(tkinter.INSERT):
-				dispStr = dispStr + "\n"
-				displayText.value = dispStr			
+				if not displayText.tk.index(tkinter.INSERT) == "5.16":
+					dispStr = dispStr + "\n"
+					displayText.value = dispStr			
 			#this blinks the cursor at the end of typing
 			if blinkTime <= 6:
 				displayText.tk.config(insertofftime = 400)
