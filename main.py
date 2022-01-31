@@ -11,6 +11,7 @@ import time
 import re
 import feedparser
 import os
+import tkinter
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 from pygame import mixer
 
@@ -236,6 +237,10 @@ def updateText():
 			displayText.tk.config(insertofftime = 0)
 			displayText.tk.focus_force()
 		if counter >= len(mainStr):
+			# Checks if cursor is at the end of a line and pushes it to next line.
+			if "16" in displayText.tk.index(tkinter.INSERT):
+				dispStr = dispStr + "\n"
+				displayText.value = dispStr			
 			#this blinks the cursor at the end of typing
 			if blinkTime <= 6:
 				displayText.tk.config(insertofftime = 400)
