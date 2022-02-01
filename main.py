@@ -146,11 +146,12 @@ def sortAndStore(part):
 				typeList[index] = []
 				newList = list(filter(lambda x: x, typeList))
 		wordDict["{}".format(part)] = []
-		wordDict.update({"{}".format(part): newList})
+		updatedList = [i.replace("'", "") for i in newList] #remove leftover single quotes
+		wordDict.update({"{}".format(part): updatedList})
 	else:
-		for element in typeList:
-			wordDict["{}".format(part)] = []
-			wordDict.update({"{}".format(part): typeList})
+		wordDict["{}".format(part)] = []
+		newList = [i.replace("'", "") for i in typeList] #remove leftover single quotes
+		wordDict.update({"{}".format(part): newList})
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
@@ -205,8 +206,6 @@ def typeSen():
 		print("The long string was: ", mainStr)
 		typeSen()
 	else:
-#		mainStr = "123456789012345 1234567890123456 12345678901234567"
-#		mainStr = "WEST DOOMS FORMER MISS USA CHESLIE KRYST "
 		return mainStr
 
 #function that updates the display, scrolls the text and calls the sentence creator when finished
