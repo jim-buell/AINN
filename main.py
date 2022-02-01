@@ -147,12 +147,12 @@ def sortAndStore(part):
 				newList = list(filter(lambda x: x, typeList))
 		wordDict["{}".format(part)] = []
 		updatedList = [i.replace("'", "") for i in newList] #remove leftover single quotes		
-		wordDict.update({"{}".format(part): newList})
+		wordDict.update({"{}".format(part): updatedList})
 	else:
 		for element in typeList:
 			wordDict["{}".format(part)] = []
 			newList = [i.replace("'", "") for i in typeList] #remove leftover single quotes
-			wordDict.update({"{}".format(part): typeList})
+			wordDict.update({"{}".format(part): newList})
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
@@ -417,6 +417,11 @@ app.repeat(1200000, soundTimer)
 #checks if new headlines needed on startup, loads words, and sets the initial sentence
 checkAge()
 getAllTypes()
+
+print("\n", "NNPs are: ", "\n", wordDict["NNP"], "\n")
+print("JJs are: ", "\n", wordDict["JJ"], "\n")
+print("NNs are: ", "\n", wordDict["NN"], "\n")
+
 typeSen()
 
 #this is the main GUI loop
