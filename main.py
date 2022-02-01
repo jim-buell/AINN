@@ -146,12 +146,13 @@ def sortAndStore(part):
 				typeList[index] = []
 				newList = list(filter(lambda x: x, typeList))
 		wordDict["{}".format(part)] = []
-		updatedList = [i.replace("'", "") for i in newList] #remove leftover single quotes
-		wordDict.update({"{}".format(part): updatedList})
-	else:
-		wordDict["{}".format(part)] = []
-		newList = [i.replace("'", "") for i in typeList] #remove leftover single quotes
+		updatedList = [i.replace("'", "") for i in newList] #remove leftover single quotes		
 		wordDict.update({"{}".format(part): newList})
+	else:
+		for element in typeList:
+			wordDict["{}".format(part)] = []
+			newList = [i.replace("'", "") for i in typeList] #remove leftover single quotes
+			wordDict.update({"{}".format(part): typeList})
 	
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
