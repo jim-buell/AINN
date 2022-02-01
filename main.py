@@ -55,7 +55,7 @@ def grabNewHeadlines():
 	
 	headlineList = []
 	# Grab headlines from RSS feeds					
-	rssNames = ["http://rss.cnn.com/rss/edition.rss", " https://www.japantimes.co.jp/feed", "http://feeds.washingtonpost.com/rss/national", "http://feeds.washingtonpost.com/rss/world"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
+	rssNames = ["http://rss.cnn.com/rss/edition.rss", "https://www.japantimes.co.jp/feed", "http://feeds.washingtonpost.com/rss/national", "http://feeds.washingtonpost.com/rss/world"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
 	for item in rssNames:
 		headlineLimit = 0
 		rssSources='{}'.format(item)
