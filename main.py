@@ -70,7 +70,7 @@ def grabNewHeadlines():
 				else:
 					headlineList.append(f"{entries['title']}.")
 					headlineLimit += 1
-	print(headlineList)
+	print(headlineList, "\n")
 	
 	#record time of headline fetch in milliseconds from epoch
 	currentTime = round(time.time() * 1000)
@@ -79,23 +79,13 @@ def grabNewHeadlines():
 	f.write(timeStr)
 	f.close()
 	
-	#append headlines to master file
-#	f = open("masterHeadlines.txt", "a")
-#	for element in headlineList:
-#		f.write(element + "\n")
-#	else:
-#		f.close()
-	
 	#overwrite new headlines to new headline file
 	headlineStrs = " "
 	f = open("newHeadlines.txt", "w")
 	for element in headlineList:
 		f.write(element + "\n")
-		headlineStrs += element
-		headlineStrs += " "
 	else:
 		f.close()
-	return headlineStrs
 
 #categorizes words in headlines into parts of speech and saves them to individual files
 def sortAndStore(part):
@@ -109,7 +99,6 @@ def sortAndStore(part):
 	Lines = File.readlines()
 	for item in Lines:
 		headlineStrs = headlineStrs + " " + item.strip()
-	#print(headlineStrs)
 	stop_words = set(stopwords.words('english'))
 	tokenized = sent_tokenize(headlineStrs)
 	for i in tokenized:
