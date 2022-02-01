@@ -1,7 +1,6 @@
 becomes
 ends
 destroys
-makes
 faces
 leaves
 presses
@@ -20,8 +19,7 @@ requires
 warns
 launches
 seeks
-plans
-locksdown
+locks down
 invades
 attacks
 claims
@@ -56,3 +54,7 @@ fries
 upends
 devastates
 burdens
+smashes
+removes
+enforces
+captures
