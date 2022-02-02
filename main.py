@@ -105,8 +105,7 @@ def sortAndStore(part):
 	tokenized = sent_tokenize(headlineStrs)
 	for i in tokenized:
 		      
-		#Word tokenizers is used to find the words 
-		#and punctuation in a string
+		#Word tokenizers is used to find the words and punctuation in a string
 		wordsList = nltk.word_tokenize(i)
   
 		#removing stop words from wordList
@@ -115,6 +114,7 @@ def sortAndStore(part):
 		# Using a Tagger. Which is part-of-speech 
 		tagged = nltk.pos_tag(wordsList)
 		
+		#joins words that should stay together 
 		groups = groupby(tagged, key=lambda x: x[1])
 		typeNames = [[w for w,_ in words] for tag,words in groups if tag=="{}".format(part)]
 		typeNames = [" ".join(name) for name in typeNames if len(name)>=0] 
@@ -130,8 +130,7 @@ def sortAndStore(part):
 		else:
 			f.close()
 	
-	#add words to global wordDict
-	#loads static words stored in files
+	#loads static words stored in files and add words to global wordDict
 	if any(x in part for x in staticFiles):
 		wordDict["{}".format(part)] = []
 		edgeFile = open("words/{}.txt".format(part), "r")
@@ -159,7 +158,6 @@ def sortAndStore(part):
 #this function passes every part of speech to the main sortAndStore function	
 def getAllTypes():
 	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
-	#old: "JJR", "JJS", "NNS","NNPS", "PDT", "RB", "RBR", "RBS", "RP", "VB", "VBG", "VBD", "VBN", "VBP", "VBZ"]	
 	for item in typeList:
 		sortAndStore("{}".format(item))
 
@@ -202,8 +200,8 @@ def typeSen():
 		else:
 			addMe = getword("{}".format(item))
 			mainStr = mainStr + addMe  + " "
-	#mainStr = titlecase(mainStr)
-	mainStr = mainStr.upper()
+	mainStr = mainStr.upper() #makes string uppercase 
+	# skips strings that might be too long for screen
 	if len(mainStr) >= 65:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
@@ -289,12 +287,6 @@ def checkAge():
 		videoFetchOn = True
 	else:
 		print("Keeping existing headlines.")
-
-#turns headline to title case		
-def titlecase(s):
-    return re.sub(
-        r"[A-Za-z]+('[A-Za-z]+)?",
-        lambda word: word.group(0).capitalize(), s)
         
 #plays the loading screen video
 def playVideo():
@@ -345,7 +337,8 @@ def playSound():
 	sound = mixer.Sound("audio/chime.ogg")
 	sound.play()
 	soundOn = False
-    
+
+# gets called after a certain amount of time, switches the sound on, and then waits until the video is played  
 def soundTimer():
 	global soundOn
 	soundOn = True
@@ -358,19 +351,19 @@ app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width 
 app.tk.config(cursor = "none")
 app.full_screen = True
 
-#sets full screen
+#sets full screen for the main app
 app.set_full_screen()
 
-#window for video 
+#initiates the window for video and the pictures it shows 
 window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
 picture = Picture(window, image="images/load1.png", grid = [0, 0])
 
-#window properties 
+#video window properties 
 window.hide()
 window.tk.config(cursor = "none")
 window.full_screen = True
 
-#sets the logo
+#sets the logo in the main app
 logo = Picture(app, image="images/logo.png", grid = [1, 3])
 logo.tk.config(bd = 0, cursor = "none")
 logo.align = "left"
@@ -385,10 +378,10 @@ left_pad = Box(app, align = "left", height = 30, width = 45, grid = [0, 0])
 #bottom_pad.bg = "red"
 #left_pad.bg = "YELLOW"
 
-#main text display 
+# initiates the main text display 
 displayText = TextBox(app, text = "", multiline = True, grid = [1, 1])
 
-#textBox properties 
+# textBox properties 
 displayText.font = "GT America Mono"
 displayText.text_color = "#00ff00"
 displayText.text_size = 39
@@ -397,9 +390,8 @@ displayText.tk.grid(ipadx = 30)
 displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
 	# Insertion cursor options
 displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertofftime = 0)
-#displayText.tk.focus_set()
+	# displayText.tk.focus_set()
 displayText.tk.bind("<Key>", "pass")
-
 displayText.height = 5
 displayText.width = 16
 
@@ -419,11 +411,6 @@ app.repeat(1200000, soundTimer)
 #checks if new headlines needed on startup, loads words, and sets the initial sentence
 checkAge()
 getAllTypes()
-
-print("\n", "NNPs are: ", "\n", wordDict["NNP"])
-print("\n", "JJs are: ", "\n", wordDict["JJ"])
-print("\n", "NNs are: ", "\n", wordDict["NN"])
-
 typeSen()
 
 #this is the main GUI loop
