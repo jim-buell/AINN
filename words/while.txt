@@ -2,5 +2,4 @@ after
 while
 before
 ahead of
-instead of 
 prior to

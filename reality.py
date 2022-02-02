@@ -34,7 +34,7 @@ headlineList = []
 # ——————————————————————————————————————————————————————
 
 	# The video option plays the video on startup if True.
-videoBool = True
+videoBool = False
 
 	# Puts IDEO names into word list 
 ideoOn = False
@@ -47,7 +47,7 @@ demoOn = False
 soundOn = True
 
 	# How many headlines play before the video starts
-headlinesInRow = 10
+headlinesInRow = 1000
 
 # Functions 
 # ——————————————————————————————————————————————————————
@@ -186,7 +186,7 @@ def typeSen():
 	mainStr = ""
 	mainStr = (headlineList[random.randrange(0, len(headlineList))])
 	mainStr = mainStr.upper()
-	if len(mainStr) >= 65:
+	if len(mainStr) >= 110:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
 		typeSen()
@@ -239,24 +239,10 @@ def updateText():
 					videoBool = True
 					loadingCounter = 0
 		else:
-			if wordWrap > 8 and (counter + 7) < len(mainStr):			
-				#if it's been a lot of letters and there's a space, hit return
-				if " " in mainStr[counter]:
-					dispStr = dispStr + "\n"
-					displayText.value = dispStr
-					counter += 1
-					wordWrap = 0
-				#if there's been a lot of letters but no space yet, keep typing
-				else:
-					dispStr = dispStr + mainStr[counter]
-					displayText.value = dispStr
-					counter += 1
-					wordWrap += 1
-			else:
-				dispStr = dispStr + mainStr[counter]
-				displayText.value = dispStr
-				counter += 1
-				wordWrap += 1
+			dispStr = dispStr + mainStr[counter]
+			displayText.value = dispStr
+			counter += 1
+			wordWrap += 1
 
 #checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():
@@ -373,7 +359,7 @@ displayText = TextBox(app, text = "", multiline = True, grid = [1, 1])
 #textBox properties 
 displayText.font = "GT America Mono"
 displayText.text_color = "#00ff00"
-displayText.text_size = 28
+displayText.text_size = 32
 displayText.align = "left"
 displayText.tk.grid(ipadx = 30)
 displayText.tk.config(cursor = "none", highlightbackground = "#000000", bd = 0)
@@ -382,8 +368,8 @@ displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertof
 #displayText.tk.focus_set()
 displayText.tk.bind("<Key>", "pass")
 
-displayText.height = 8
-displayText.width = 16
+displayText.height = 12
+displayText.width = 20
 
 # Main loop and scheduled functions
 # ————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -411,3 +397,4 @@ typeSen()
 
 #this is the main GUI loop
 app.display()
+
