@@ -15,3 +15,36 @@ words/NNP.txt
 archive/randtest.py
 archive/rsstest.py
 .DS_Store
+archive/.DS_Store
+archive/Anytest.py
+archive/dedupe.py
+archive/fetchWords.py
+archive/functions.py
+archive/langModel.py
+archive/langModel2.py
+archive/lex.java
+archive/lexTest.py
+archive/main.py
+archive/scroll.py
+archive/str test 7.py
+archive/testfile.py
+archive/timeRecordTest.py
+archive/timetest.py
+archive/verbs.py
+archiveFiles/Anytest.py
+archiveFiles/dedupe.py
+archiveFiles/fetchWords.py
+archiveFiles/functions.py
+archiveFiles/langModel.py
+archiveFiles/langModel2.py
+archiveFiles/lex.java
+archiveFiles/lexTest.py
+archiveFiles/main.py
+archiveFiles/randtest.py
+archiveFiles/rsstest.py
+archiveFiles/scroll.py
+archiveFiles/str test 7.py
+archiveFiles/testfile.py
+archiveFiles/timeRecordTest.py
+archiveFiles/timetest.py
+archiveFiles/verbs.py
