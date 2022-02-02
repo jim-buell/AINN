@@ -70,7 +70,10 @@ def grabNewHeadlines():
 				else:
 					headlineList.append(f"{entries['title']}.")
 					headlineLimit += 1
-	print(headlineList, "\n")
+	for item in headlineList:
+		print(item, "\n")
+	#gets rid of ’s to prevent weird word combos
+	headlineList = [i.replace("’s", ":") for i in headlineList]	
 	
 	#record time of headline fetch in milliseconds from epoch
 	currentTime = round(time.time() * 1000)
@@ -80,7 +83,6 @@ def grabNewHeadlines():
 	f.close()
 	
 	#overwrite new headlines to new headline file
-	headlineStrs = " "
 	f = open("newHeadlines.txt", "w")
 	for element in headlineList:
 		f.write(element + "\n")
@@ -418,9 +420,9 @@ app.repeat(1200000, soundTimer)
 checkAge()
 getAllTypes()
 
-print("\n", "NNPs are: ", "\n", wordDict["NNP"], "\n")
-print("JJs are: ", "\n", wordDict["JJ"], "\n")
-print("NNs are: ", "\n", wordDict["NN"], "\n")
+print("\n", "NNPs are: ", "\n", wordDict["NNP"])
+print("\n", "JJs are: ", "\n", wordDict["JJ"])
+print("\n", "NNs are: ", "\n", wordDict["NN"])
 
 typeSen()
 
