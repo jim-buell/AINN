@@ -47,7 +47,7 @@ demoOn = False
 soundOn = True
 
 	# How many headlines play before the video starts
-headlinesInRow = 1000
+headlinesInRow = 1001
 
 # Functions 
 # ——————————————————————————————————————————————————————
