@@ -1,5 +1,7 @@
 These are setup instructions for running on macOS. I don't have any extra machines to test this installation with, so YMMV. 
 
+Download or clone the repository. 
+
 Check if you have python 3 instlled. In Terminal, type: 
 python3
 
