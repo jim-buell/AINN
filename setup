@@ -1,0 +1,15 @@
+These are setup instructions for running on macOS. I don't have any extra machines to test this installation with, so YMMV. 
+
+Check if you have python 3 instlled. In Terminal, type: 
+python3
+
+If it's installed, you'll enter the python interpreter. You can exit that with Control + d. If not, you may be prompted to install Command Line Tools as promoted by macOS. Do that. 
+
+Install required packages using the following command:
+pip3 install nltk && pip3 install guizero && pip3 install feedparser
+
+Install language processing data from nltk with the following command:
+python3 -m nltk.downloader popular
+
+To run the program, type:
+python3 /path/to/directory/goes/here/InfiniteScroll2/main.py
