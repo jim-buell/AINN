@@ -51,3 +51,10 @@ archiveFiles/verbs.py
 reality.py
 .DS_Store
 .DS_Store
+curate.py
+curate.txt
+words/NNP.txt
+words/NN.txt
+words/JJ.txt
+newHeadlines.txt
+elapsedTime.txt
