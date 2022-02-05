@@ -141,7 +141,6 @@ def sortAndStore(part):
 		wordDict.update({"{}".format(part): edgeList})
 		edgeFile.close()
 	if part == "NN":
-		print("typelist is", typeList)
 		#for index, item in enumerate(typeList):
 			#replaces any multi-word noun with []. Then removes all [] from list.
 		#	if " " in item:
@@ -150,7 +149,6 @@ def sortAndStore(part):
 		wordDict["{}".format(part)] = []
 		updatedList = [i.replace("'", "") for i in typeList] #remove leftover single quotes		
 		wordDict.update({"{}".format(part): updatedList})
-		print("\n", "NNs are", wordDict["NN"])
 	else:
 		for element in typeList:
 			wordDict["{}".format(part)] = []
