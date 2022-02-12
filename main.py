@@ -8,9 +8,9 @@ from itertools import groupby
 import random
 from guizero import App, TextBox, Picture, Box, Window
 import time
-import re
 import feedparser
 import os
+import platform
 import tkinter
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 from pygame import mixer
@@ -32,27 +32,44 @@ videoFetchOn = False
 # Options for video, audio, and names
 # ——————————————————————————————————————————————————————
 
-	# The video option plays the video on startup if True.
+# The video option plays the video on startup if True.
 videoBool = True
 
-	# Puts IDEO names into word list 
+# Puts IDEO names into word list 
 ideoOn = False
 
-	# Puts Demo names into the word list
+# Puts Demo names into the word list
 demoOn = False
 
-	# Turns sound on at start if true. videoBool must also be on. 
-	# Will play sound every 20 minutes either way.
+# Turns sound on at start if true. videoBool must also be on. 
+# Will play sound every 20 minutes either way.
 soundOn = True
 
-	# How many headlines play before the video starts
+# How many headlines play before the video starts
 headlinesInRow = 10
 
 # Functions 
 # ——————————————————————————————————————————————————————
 
+# mac-specific code to get external files
+def get_path(filename):
+	
+	name = os.path.splitext(filename)[0]
+	ext = os.path.splitext(filename)[1]
+
+	if platform.system() == "Darwin":
+		from AppKit import NSBundle
+		file = NSBundle.mainBundle().pathForResource_ofType_(name, ext)
+		return file or os.path.realpath(filename)
+	else:
+		return os.path.realpath(filename)
+
 def grabNewHeadlines():
 	
+	#define relative file paths
+	timeFile = get_path("elapsedTime.txt")
+	newHeadlinesFile = get_path("newHeadlines.txt")
+
 	headlineList = []
 	# Grab headlines from RSS feeds					
 	rssNames = ["http://rss.cnn.com/rss/edition.rss", "https://www.japantimes.co.jp/feed", "http://feeds.washingtonpost.com/rss/national", "http://feeds.washingtonpost.com/rss/world"] #, "https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/topic/destination/japan/rss.xml"]
@@ -77,13 +94,13 @@ def grabNewHeadlines():
 	
 	#record time of headline fetch in milliseconds from epoch
 	currentTime = round(time.time() * 1000)
-	f = open("elapsedTime.txt", "w")
+	f = open(timeFile, "w", encoding="utf-8")
 	timeStr = str(currentTime)
 	f.write(timeStr)
 	f.close()
 	
 	#overwrite new headlines to new headline file
-	f = open("newHeadlines.txt", "w")
+	f = open(newHeadlinesFile, "w", encoding="utf-8")
 	for element in headlineList:
 		f.write(element + "\n")
 	else:
@@ -91,17 +108,22 @@ def grabNewHeadlines():
 
 #categorizes words in headlines into parts of speech and saves them to individual files
 def sortAndStore(part):
-	
+
 	typeList = []
 	#add names of any static files here. Also add them to the global wordDict dictionary 
 	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
+	
+	#define relative file paths
+	newHeadlinesFile = get_path("newHeadlines.txt")
+	partFile = get_path("words/{}.txt".format(part))
+
 	#open the file with the Headlines and put them in a str
-	File = open(r"newHeadlines.txt", "r")
+	File = open(newHeadlinesFile, "r", encoding="utf-8")
 	headlineStrs = ""
 	Lines = File.readlines()
 	for item in Lines:
 		headlineStrs = headlineStrs + " " + item.strip()
-	stop_words = set(stopwords.words('english'))
+	stop_words = set(stopwords.words("english"))
 	tokenized = sent_tokenize(headlineStrs)
 	for i in tokenized:
 		      
@@ -124,7 +146,7 @@ def sortAndStore(part):
 	#overwrites new parts to file
 	if not any(x in part for x in staticFiles):
 		overWrite = "w"
-		f = open("words/{}.txt".format(part), "{}".format(overWrite))
+		f = open(partFile, "{}".format(overWrite), encoding="utf-8")
 		for element in typeList:
 			f.write(element + " \n")
 		else:
@@ -133,7 +155,7 @@ def sortAndStore(part):
 	#loads static words stored in files and add words to global wordDict
 	if any(x in part for x in staticFiles):
 		wordDict["{}".format(part)] = []
-		edgeFile = open("words/{}.txt".format(part), "r")
+		edgeFile = open(partFile, "r", encoding="utf-8")
 		listTemp = edgeFile.readlines()
 		edgeList = []
 		for item in listTemp:
@@ -276,8 +298,9 @@ def updateText():
 
 #checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():
+	timeFile = get_path("elapsedTime.txt")
 	global videoFetchOn
-	f = open(r"elapsedTime.txt", "r")
+	f = open(timeFile, "r", encoding="utf-8")
 	lastTime = int(f.read().rstrip())
 	currentTime = round(time.time() * 1000)
 	elapsedTime = (currentTime - lastTime)
@@ -287,6 +310,7 @@ def checkAge():
 		videoFetchOn = True
 	else:
 		print("Keeping existing headlines.")
+	f.close()
         
 #plays the loading screen video
 def playVideo():
@@ -305,18 +329,18 @@ def playVideo():
 	if videoCount <= 39:
 		videoCount += 1
 		if videoCount == 3 or videoCount == 21 or videoCount == 12:
-			picture.value = "images/load1.png"
+			picture.value = get_path("images/load1.png")
 		if videoCount == 6 or videoCount == 24 or videoCount == 15 or videoCount == 33:
-			picture.value = "images/load2.png"
+			picture.value = get_path("images/load2.png")
 		if videoCount == 9 or videoCount == 18 or videoCount == 27 or videoCount == 36:
-			picture.value = "images/load3.png"
+			picture.value = get_path("images/load3.png")
 		if videoCount == 30:
-			picture.value = "images/load4.png"
+			picture.value = get_path("images/load4.png")
 	if videoCount >= 39:
 		videoBool = False
 		window.hide()
 		videoCount = 0
-		picture.value = "images/load1.png"
+		picture.value = get_path("images/load1.png")
 		#resets focus to text box so insertion cursor is visible 
 		displayText.tk.focus_set()
 	
@@ -334,7 +358,7 @@ def videoFetch():
 def playSound():
 	global soundOn
 	mixer.init()
-	sound = mixer.Sound("audio/chime.ogg")
+	sound = mixer.Sound(get_path("audio/chime.ogg"))
 	sound.play()
 	soundOn = False
 
@@ -356,7 +380,7 @@ app.set_full_screen()
 
 #initiates the window for video and the pictures it shows 
 window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
-picture = Picture(window, image="images/load1.png", grid = [0, 0])
+picture = Picture(window, image = get_path("images/load1.png"), grid = [0, 0])
 
 #video window properties 
 window.hide()
@@ -364,7 +388,7 @@ window.tk.config(cursor = "none")
 window.full_screen = True
 
 #sets the logo in the main app
-logo = Picture(app, image="images/logo.png", grid = [1, 3])
+logo = Picture(app, image = get_path("images/logo.png"), grid = [1, 3])
 logo.tk.config(bd = 0, cursor = "none")
 logo.align = "left"
 logo.tk.config(cursor = "none")
