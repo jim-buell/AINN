@@ -63,7 +63,8 @@ def get_path(filename):
 		return file or os.path.realpath(filename)
 	else:
 		return os.path.realpath(filename)
-
+	
+# grabs headlines from RSS feeds and stores them in a local file for later processing. 
 def grabNewHeadlines():
 	
 	#define relative file paths
@@ -106,7 +107,7 @@ def grabNewHeadlines():
 	else:
 		f.close()
 
-#categorizes words in headlines into parts of speech and saves them to individual files
+# loads headlines from file, categorizes words into parts of speech, and stores them in a global dictionary
 def sortAndStore(part):
 
 	typeList = []
@@ -177,19 +178,19 @@ def sortAndStore(part):
 			newList = [i.replace("'", "") for i in typeList] #remove leftover single quotes
 			wordDict.update({"{}".format(part): newList})
 	
-#this function passes every part of speech to the main sortAndStore function	
+# passes every part of speech to the main sortAndStore function	
 def getAllTypes():
 	typeList = ["JJ", "NN", "NNP", "verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
 	for item in typeList:
 		sortAndStore("{}".format(item))
 
-#gets a random word from a list of specified word types. Pass a str indicating the 
-#part of speech to get that type of word. Returns a single word as str.
+# gets a random word from a list of specified word types. Pass a str indicating the 
+# part of speech to get that type of word. Returns a single word as str.
 def getword(wordType):
 	nextWord = wordDict["{}".format(wordType)][random.randrange(0, len(wordDict["{}".format(wordType)]))]
 	return nextWord
 	
-#function that picks a sentence structure and then grabs random words to form a sentence
+# function that picks a sentence structure and then grabs random words to form a sentence
 def typeSen():
 	#sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
 	if ideoOn == True:
@@ -231,7 +232,7 @@ def typeSen():
 	else:
 		return mainStr
 
-#function that updates the display, scrolls the text and calls the sentence creator when finished
+# updates the display, scrolls the text and calls the sentence creator when finished
 def updateText():
 	global counter
 	global dispStr
@@ -296,7 +297,7 @@ def updateText():
 				counter += 1
 				wordWrap += 1
 
-#checks to see if headlines are more than 1 hours old and gets new if so	
+# checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():
 	timeFile = get_path("elapsedTime.txt")
 	global videoFetchOn
@@ -312,7 +313,7 @@ def checkAge():
 		print("Keeping existing headlines.")
 	f.close()
         
-#plays the loading screen video
+# plays the loading screen video
 def playVideo():
 	global videoCount 
 	global videoBool
@@ -354,7 +355,7 @@ def videoFetch():
 	global videoFetchOn
 	videoFetchOn = True	
 	
-#plays the startup chime
+# plays the startup chime
 def playSound():
 	global soundOn
 	mixer.init()
@@ -370,37 +371,33 @@ def soundTimer():
 # GUIzero Properties 
 # ————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#initiates the GUI
+# initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 app.tk.config(cursor = "none")
 app.full_screen = True
 
-#sets full screen for the main app
+# sets full screen for the main app
 app.set_full_screen()
 
-#initiates the window for video and the pictures it shows 
+# initiates the window for video and the pictures it shows 
 window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
 picture = Picture(window, image = get_path("images/load1.png"), grid = [0, 0])
 
-#video window properties 
+# video window properties 
 window.hide()
 window.tk.config(cursor = "none")
 window.full_screen = True
 
-#sets the logo in the main app
+# sets the logo in the main app
 logo = Picture(app, image = get_path("images/logo.png"), grid = [1, 3])
 logo.tk.config(bd = 0, cursor = "none")
 logo.align = "left"
 logo.tk.config(cursor = "none")
 
-#padding for logo
+# padding for logo
 top_pad = Box(app, align = "left", height = 30, width = 5, grid = [1, 0])
 bottom_pad = Box(app, align = "left", height = 15, width = 5, grid = [1, 2])
 left_pad = Box(app, align = "left", height = 30, width = 45, grid = [0, 0])
-
-#top_pad.bg = "#ffffff"
-#bottom_pad.bg = "red"
-#left_pad.bg = "YELLOW"
 
 # initiates the main text display 
 displayText = TextBox(app, text = "", multiline = True, grid = [1, 1])
@@ -425,17 +422,17 @@ displayText.width = 16
 # Main Text Loop — Calls updateText repeatedly in the app loop — gets new letters to pass to the GUI and runs everything else...
 app.repeat(200, updateText)
 
-#gets new headlines every hour
+# gets new headlines every hour
 app.repeat(3600000, videoFetch)
 
-#plays sound with video every 20 minutes
+# plays sound with video every 20 minutes
 app.repeat(1200000, soundTimer)
 
-#startup sequences
-#checks if new headlines needed on startup, loads words, and sets the initial sentence
+# startup sequences
+# checks if new headlines needed on startup, loads words, and sets the initial sentence
 checkAge()
 getAllTypes()
 typeSen()
 
-#this is the main GUI loop
+# main GUI loop
 app.display()
