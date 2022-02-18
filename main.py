@@ -210,8 +210,13 @@ def typeSen():
 	struct4 = ["is", (proper[random.randrange(0, len(proper))]), "verbING", (proper[random.randrange(0, len(proper))]), "?"]
 	struct5 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (proper[random.randrange(0, len(proper))])]
 	struct6 = [(proper[random.randrange(0, len(proper))]), "verbState", "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
-	
-	allSentences = [struct1, struct2, struct3, struct4, struct5, struct6]
+	struct7 = ["JJ", "NN", "verbTrans", (proper[random.randrange(0, len(proper))])]
+	struct8 = ["NN", "verbTrans", (proper[random.randrange(0, len(proper))])]
+	struct9 = ["is", "JJ", "NN", "verbING", (proper[random.randrange(0, len(proper))]), "?"]
+	struct10 = ["JJ", "NN", "verbState", "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
+	strcut11 = ["JJ", "NN", "verbTrans", "JJ", "NN"]
+
+	allSentences = [struct1, struct2, struct3, struct4, struct5, struct6, struct7, struct8, struct9, struct10, strcut11]
 	
 	#add words to the main string.
 	global mainStr
