@@ -296,7 +296,7 @@ def playVideo():
 	global videoFetchOn
 	window.show()
 	if videoFetchOn == True:
-		print("Getting headlines during video")
+		print("\n", "New headlines:")
 		fetchNew()
 		videoFetchOn = False
 	if soundOn == True:
