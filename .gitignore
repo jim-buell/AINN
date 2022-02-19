@@ -14,6 +14,7 @@ words/NN.txt
 words/NNP.txt
 archive/randtest.py
 archive/rsstest.py
+ideo.txt
 .DS_Store
 archive/.DS_Store
 archive/Anytest.py
