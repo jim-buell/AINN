@@ -1,20 +1,24 @@
-diplomacy table 
-crisis 
+response 
+world 
+disbelief 
+troop buildup 
 warning 
 world 
-court 
-judge 
-ferry fire 
-wind 
-record 
-videos 
 week 
+court 
+ferry fire 
+warship 
+laser 
 message 
 phone 
 family 
 officer 
 sentence 
 divide 
+videos 
+week 
+wind 
+record 
 saga set 
 game 
 day 
@@ -22,12 +26,18 @@ bear
 record year 
 data 
 death 
-soldier 
-border 
 student 
 university entrance 
 row 
 tracker 
+ship 
+luxury 
+crew 
+target 
+booster 
+day 
+soldier 
+border 
 success win-win 
 sport 
 town represent 
@@ -44,8 +54,6 @@ capital
 slump 
 PlayStation strategy 
 bombing 
-sport 
-appeal 
 pilot 
 candy 
 airlift 
@@ -91,11 +99,14 @@ school
 jail 
 lawsuit 
 invasion 
+judge 
+corruption fight 
 pilot 
 candy 
 airlift 
-crisis 
 invasion 
+judge 
+corruption fight 
 pilot 
 candy 
 airlift 
@@ -118,7 +129,6 @@ highway
 cloth 
 debate 
 crisis 
-cartel 
 star power 
 course 
 act 
