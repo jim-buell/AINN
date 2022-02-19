@@ -1,4 +1,4 @@
-#Infinite Scroll 2.0
+#AI News Network
 
 import nltk
 from nltk.corpus import stopwords
@@ -67,7 +67,7 @@ def get_path(filename):
 # grabs headlines from RSS feeds and stores them in a local file for later processing. 
 def grabNewHeadlines():
 	
-	#define relative file paths
+	# define relative file paths
 	timeFile = get_path("elapsedTime.txt")
 	newHeadlinesFile = get_path("newHeadlines.txt")
 
@@ -90,17 +90,17 @@ def grabNewHeadlines():
 					headlineLimit += 1
 	for item in headlineList:
 		print(item, "\n")
-	#gets rid of ’s to prevent weird word combos
+	# gets rid of ’s to prevent weird word combos
 	headlineList = [i.replace("’s", ":") for i in headlineList]	
 	
-	#record time of headline fetch in milliseconds from epoch
+	# record time of headline fetch in milliseconds from epoch
 	currentTime = round(time.time() * 1000)
 	f = open(timeFile, "w", encoding="utf-8")
 	timeStr = str(currentTime)
 	f.write(timeStr)
 	f.close()
 	
-	#overwrite new headlines to new headline file
+	# overwrite new headlines to new headline file
 	f = open(newHeadlinesFile, "w", encoding="utf-8")
 	for element in headlineList:
 		f.write(element + "\n")
@@ -111,14 +111,14 @@ def grabNewHeadlines():
 def sortAndStore(part):
 
 	typeList = []
-	#add names of any static files here. Also add them to the global wordDict dictionary 
+	# add names of any static files here. Also add them to the global wordDict dictionary 
 	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
 	
-	#define relative file paths
+	# define relative file paths
 	newHeadlinesFile = get_path("newHeadlines.txt")
 	partFile = get_path("words/{}.txt".format(part))
 
-	#open the file with the Headlines and put them in a str
+	# open the file with the Headlines and put them in a str
 	File = open(newHeadlinesFile, "r", encoding="utf-8")
 	headlineStrs = ""
 	Lines = File.readlines()
@@ -128,23 +128,23 @@ def sortAndStore(part):
 	tokenized = sent_tokenize(headlineStrs)
 	for i in tokenized:
 		      
-		#Word tokenizers is used to find the words and punctuation in a string
+		# Word tokenizers is used to find the words and punctuation in a string
 		wordsList = nltk.word_tokenize(i)
   
-		#removing stop words from wordList
+		# removing stop words from wordList
 		wordsList = [w for w in wordsList if not w in stop_words] 
   
 		# Using a Tagger. Which is part-of-speech 
 		tagged = nltk.pos_tag(wordsList)
 		
-		#joins words that should stay together 
+		# joins words that should stay together 
 		groups = groupby(tagged, key=lambda x: x[1])
 		typeNames = [[w for w,_ in words] for tag,words in groups if tag=="{}".format(part)]
 		typeNames = [" ".join(name) for name in typeNames if len(name)>=0] 
 		typeList += typeNames
 	File.close()
 	
-	#overwrites new parts to file
+	# overwrites new parts to file
 	if not any(x in part for x in staticFiles):
 		overWrite = "w"
 		f = open(partFile, "{}".format(overWrite), encoding="utf-8")
@@ -153,7 +153,7 @@ def sortAndStore(part):
 		else:
 			f.close()
 	
-	#loads static words stored in files and add words to global wordDict
+	# loads static words stored in files and add words to global wordDict
 	if any(x in part for x in staticFiles):
 		wordDict["{}".format(part)] = []
 		edgeFile = open(partFile, "r", encoding="utf-8")
@@ -164,7 +164,7 @@ def sortAndStore(part):
 		wordDict.update({"{}".format(part): edgeList})
 		edgeFile.close()
 	if part == "NN":
-		#for index, item in enumerate(typeList):
+		# for index, item in enumerate(typeList):
 			#replaces any multi-word noun with []. Then removes all [] from list.
 		#	if " " in item:
 		#		typeList[index] = []
@@ -192,7 +192,7 @@ def getword(wordType):
 	
 # function that picks a sentence structure and then grabs random words to form a sentence
 def typeSen():
-	#sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
+	# sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
 	if ideoOn == True:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "ideo"]
 		proper = ["NNP", "NNP", "NNP", "NNP", "ideo"]
@@ -203,7 +203,7 @@ def typeSen():
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP"]
 		proper = ["NNP", "NNP", "NNP", "NNP"]
 	
-	#sentence structures 
+	# sentence structures 
 	struct1 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (senParts[random.randrange(0, len(senParts))])] 
 	struct2 = [(proper[random.randrange(0, len(proper))]), "verbTrans", "JJ", "NN"] 
 	struct3 = [(proper[random.randrange(0, len(proper))]), "verbTrans", (senParts[random.randrange(0, len(senParts))]), "while", "verbING", (senParts[random.randrange(0, len(senParts))])]
@@ -218,7 +218,7 @@ def typeSen():
 
 	allSentences = [struct1, struct2, struct3, struct4, struct5, struct6, struct7, struct8, struct9, struct10, strcut11]
 	
-	#add words to the main string.
+	# add words to the main string.
 	global mainStr
 	mainStr = ""
 	wordSeq = allSentences[random.randrange(0, len(allSentences))]
@@ -263,11 +263,11 @@ def updateText():
 				if not displayText.tk.index(tkinter.INSERT) == "5.18":
 					dispStr = dispStr + "\n"
 					displayText.value = dispStr			
-			#this blinks the cursor at the end of typing
+			# this blinks the cursor at the end of typing
 			if blinkTime <= 6:
 				displayText.tk.config(insertofftime = 400)
 				blinkTime += 1
-			#resets everything for next headline
+			# resets everything for next headline
 			else:			
 				window.tk.focus_force()
 				mainStr = ""
@@ -277,20 +277,20 @@ def updateText():
 				dispStr = ""
 				blinkTime = 0
 				wordWrap = 0
-				#plays the loading screen after x number of headlines
+				# plays the loading screen after x number of headlines
 				loadingCounter += 1
 				if loadingCounter >= headlinesInRow:
 					videoBool = True
 					loadingCounter = 0
 		else:
 			if wordWrap > 8 and (counter + 7) < len(mainStr):			
-				#if it's been a lot of letters and there's a space, hit return
+				# if it's been a lot of letters and there's a space, hit return
 				if " " in mainStr[counter]:
 					dispStr = dispStr + "\n"
 					displayText.value = dispStr
 					counter += 1
 					wordWrap = 0
-				#if there's been a lot of letters but no space yet, keep typing
+				# if there's been a lot of letters but no space yet, keep typing
 				else:
 					dispStr = dispStr + mainStr[counter]
 					displayText.value = dispStr
@@ -347,7 +347,7 @@ def playVideo():
 		window.hide()
 		videoCount = 0
 		picture.value = get_path("images/load1.png")
-		#resets focus to text box so insertion cursor is visible 
+		# resets focus to text box so insertion cursor is visible 
 		displayText.tk.focus_set()
 	
 def fetchNew():
