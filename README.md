@@ -1,3 +1,7 @@
+The short version:
+This is a dumb AI that makes dumb news headlines via GUI-based output. 
+
+And here’s the pretentious version:
 Contemporary political and cultural opinion is increasingly driven through emotional reactions to often-dubious, context-free information. Financial incentives on the Internet and on social media mean that the information that gets promoted is that which best drives “engagement.” Emotion — particularly outrage — is a powerful driver of engagement, and media companies seeking views see few downsides in promoting rage-inducing material even when that information contains no truth nor value to society.
 
 If generating outrage is more valuable than reporting truth, media companies will soon adopt tools designed to most efficiently create rage-inducing content. The AI News Network is such a tool.
