@@ -1,14 +1,18 @@
-These are setup instructions for running on macOS. I don't have any extra machines to test a new installation with, so YMMV. 
+These are setup instructions for running on macOS Big Sur. I don't have any extra machines to test a new installation with, so YMMV.
+These are also very rudimentary installation instructions. If you know how to manage virtual environments and things... um... that I guess. 
+No warranties or guarantees here, etc. etc. 
+
+——————— Install————————
 
 Download or clone the repository. 
 
-Check if you have python 3 instlled. In Terminal, type: 
+Check if you have python 3 installed. In Terminal, type: 
 python3
 
 If it's installed, you'll enter the python interpreter. You can exit that with Control + d. If not, you may be prompted to install Command Line Tools as promoted by macOS. Do that. 
 
-Install required packages using the following command:
-pip3 install nltk && pip3 install guizero && pip3 install feedparser
+Install required packages using the following commands:
+pip3 install nltk && pip3 install guizero && pip3 install feedparser && pip3 install pygame
 
 Install language processing data from nltk with the following command:
 python3 -m nltk.downloader popular
