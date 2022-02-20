@@ -68,8 +68,8 @@ def get_path(filename):
 def grabNewHeadlines():
 	
 	# define relative file paths
-	timeFile = get_path("elapsedTime.txt")
-	newHeadlinesFile = get_path("newHeadlines.txt")
+	timeFile = get_path("words/elapsedTime.txt")
+	newHeadlinesFile = get_path("words/newHeadlines.txt")
 
 	headlineList = []
 	# Grab headlines from RSS feeds					
@@ -115,7 +115,7 @@ def sortAndStore(part):
 	staticFiles = ["verbTrans", "ideo", "verbING", "while", "is", "?", "verbState", "demo"]
 	
 	# define relative file paths
-	newHeadlinesFile = get_path("newHeadlines.txt")
+	newHeadlinesFile = get_path("words/newHeadlines.txt")
 	partFile = get_path("words/{}.txt".format(part))
 
 	# open the file with the Headlines and put them in a str
@@ -304,7 +304,7 @@ def updateText():
 
 # checks to see if headlines are more than 1 hours old and gets new if so	
 def checkAge():
-	timeFile = get_path("elapsedTime.txt")
+	timeFile = get_path("words/elapsedTime.txt")
 	global videoFetchOn
 	f = open(timeFile, "r", encoding="utf-8")
 	lastTime = int(f.read().rstrip())
