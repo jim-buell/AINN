@@ -18,4 +18,4 @@ Install language processing data from nltk with the following command:
 python3 -m nltk.downloader popular
 
 To run the program, type:
-python3 /path/to/directory/goes/here/InfiniteScroll2/main.py
+python3 /path/to/directory/goes/here/main.py
