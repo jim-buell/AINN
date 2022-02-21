@@ -1,21 +1,25 @@
 These are setup instructions for running on macOS Big Sur. I don't have any extra machines to test a new installation with, so YMMV.
-These are also very rudimentary installation instructions. If you know how to manage virtual environments and things... um... that I guess. 
-No warranties or guarantees here, etc. etc. 
+These are also very rudimentary installation instructions. No warranties or guarantees here, etc. etc. 
 
 ——————— Install————————
 
-Download or clone the repository. 
+Download or clone the repository. In a Terminal window, change to type the directory you’d like to the use for the files. Type: 
+git clone https://github.com/jim-buell/AINN.git
 
-Check if you have python 3 installed. In Terminal, type: 
-python3
+Change to the directory of the repository. Type:
+cd AINN
 
-If it's installed, you'll enter the python interpreter. You can exit that with Control + d. If not, you may be prompted to install Command Line Tools as promoted by macOS. Do that. 
+Install a virtual environment. Type:
+python3 -m venv venv
 
-Install required packages using the following commands:
-pip3 install nltk && pip3 install guizero && pip3 install feedparser && pip3 install pygame
+Activate the virtual environment. Type:
+source venv/bin/activate
+
+Install required packages into your virtual environment using the following command:
+pip3 install -r requirements.txt
 
 Install language processing data from nltk with the following command:
 python3 -m nltk.downloader popular
 
 To run the program, type:
-python3 /path/to/directory/goes/here/main.py
+python main.py

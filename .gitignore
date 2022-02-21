@@ -103,3 +103,4 @@ dist/main.app/Contents/Resources/words/verbState.txt
 dist/main.app/Contents/Resources/words/verbTrans.txt
 dist/main.app/Contents/Resources/words/while.txt
 venv/
+.unotes
