@@ -36,7 +36,7 @@ videoFetchOn = False
 videoBool = True
 
 # Puts IDEO names into word list 
-ideoOn = False
+ideoOn = True
 
 # Puts Demo names into the word list
 demoOn = False
@@ -196,7 +196,7 @@ def typeSen():
 	if ideoOn == True:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "ideo"]
 		proper = ["NNP", "NNP", "NNP", "NNP", "ideo"]
-	if demoOn == True:
+	elif demoOn == True:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "demo"]
 		proper = ["NNP", "NNP", "NNP", "NNP", "demo"]
 	else:
