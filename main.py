@@ -36,7 +36,7 @@ videoFetchOn = False
 videoBool = True
 
 # Puts IDEO names into word list 
-ideoOn = True
+ideoOn = False
 
 # Puts Demo names into the word list
 demoOn = False
