@@ -11,7 +11,7 @@ words/.DS_Store
 elapsedTime.txt
 newHeadlines.txt
 words/JJ.txt
-words/NN.txt
+./words/NN.txt
 words/NNP.txt
 archive/randtest.py
 archive/rsstest.py
