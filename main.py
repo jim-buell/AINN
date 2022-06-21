@@ -91,7 +91,7 @@ def grabNewHeadlines():
 
 	# Check to make sure there are headlines present. Doesn't overwrite if not. 
 	if len(headlineList) == 0:
-		print("\n" + "Something went wrong grabbing new headlines. Leaving current headlines in place." + "\n")
+		print("Something went wrong grabbing new headlines. Leaving current headlines in place.")
 
 	else:
 		overWriteFile(newHeadlinesFile, headlineList)
@@ -141,7 +141,7 @@ def sortAndStore(part):
 		overWrite = "w"
 		f = open(partFile, "{}".format(overWrite), encoding="utf-8")
 		for element in typeList:
-			f.write(element + " " +"")
+			f.write(element + " \n")
 		else:
 			f.close()
 	
@@ -253,7 +253,7 @@ def updateText():
 			# If it's the last character of the last line, it leave the little cursor there				
 			if "18" in displayText.tk.index(tkinter.INSERT):
 				if not displayText.tk.index(tkinter.INSERT) == "5.18":
-					dispStr = dispStr + "" +""
+					dispStr = dispStr + "\n"
 					displayText.value = dispStr			
 			# this blinks the cursor at the end of typing
 			if blinkTime <= 6:
@@ -278,7 +278,7 @@ def updateText():
 			if wordWrap > 8 and (counter + 7) < len(mainStr):			
 				# if it's been a lot of letters and there's a space, hit return
 				if " " in mainStr[counter]:
-					dispStr = dispStr + "" +""
+					dispStr = dispStr + "\n"
 					displayText.value = dispStr
 					counter += 1
 					wordWrap = 0
@@ -320,7 +320,7 @@ def playVideo():
 	global videoFetchOn
 	window.show()
 	if videoFetchOn == True:
-		print("" +"", "New headlines:")
+		print("\n", "New headlines:")
 		fetchNew()
 		videoFetchOn = False
 	if soundOn == True:
@@ -461,4 +461,4 @@ app.display()
 
 
 #TODO: The checkAge() function only gets new headlines when the video is played. This probably needs to happen anytime the 
-# program is started regardless of whether the video runs. There's a bool called isOld to start with. 
+# program is started regardless of whether the video runs. There's a bool called isOld to start with.
