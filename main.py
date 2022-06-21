@@ -88,24 +88,16 @@ def grabNewHeadlines():
 				else:
 					headlineList.append(f"{entries['title']}.")
 					headlineLimit += 1
-	for item in headlineList:
-		print(item, "\n")
-	# gets rid of ’s to prevent weird word combos
-	headlineList = [i.replace("’s", ":") for i in headlineList]	
-	
-	# record time of headline fetch in milliseconds from epoch
-	currentTime = round(time.time() * 1000)
-	f = open(timeFile, "w", encoding="utf-8")
-	timeStr = str(currentTime)
-	f.write(timeStr)
-	f.close()
-	
-	# overwrite new headlines to new headline file
-	f = open(newHeadlinesFile, "w", encoding="utf-8")
-	for element in headlineList:
-		f.write(element + "\n")
+
+	# Check to make sure there are headlines present. Doesn't overwrite if not. 
+	if len(headlineList) == 0:
+		print("\n" + "Something went wrong grabbing new headlines. Leaving current headlines in place." + "\n")
+
 	else:
-		f.close()
+		overWriteFile(newHeadlinesFile, headlineList)
+
+	# Record time of headline fetch (or attempted headline fetch). 
+	recordTime(timeFile)
 
 # loads headlines from file, categorizes words into parts of speech, and stores them in a global dictionary
 def sortAndStore(part):
@@ -149,7 +141,7 @@ def sortAndStore(part):
 		overWrite = "w"
 		f = open(partFile, "{}".format(overWrite), encoding="utf-8")
 		for element in typeList:
-			f.write(element + " \n")
+			f.write(element + " " +"")
 		else:
 			f.close()
 	
@@ -261,7 +253,7 @@ def updateText():
 			# If it's the last character of the last line, it leave the little cursor there				
 			if "18" in displayText.tk.index(tkinter.INSERT):
 				if not displayText.tk.index(tkinter.INSERT) == "5.18":
-					dispStr = dispStr + "\n"
+					dispStr = dispStr + "" +""
 					displayText.value = dispStr			
 			# this blinks the cursor at the end of typing
 			if blinkTime <= 6:
@@ -286,7 +278,7 @@ def updateText():
 			if wordWrap > 8 and (counter + 7) < len(mainStr):			
 				# if it's been a lot of letters and there's a space, hit return
 				if " " in mainStr[counter]:
-					dispStr = dispStr + "\n"
+					dispStr = dispStr + "" +""
 					displayText.value = dispStr
 					counter += 1
 					wordWrap = 0
@@ -306,6 +298,7 @@ def updateText():
 def checkAge():
 	timeFile = get_path("words/elapsedTime.txt")
 	global videoFetchOn
+	isOld = False
 	f = open(timeFile, "r", encoding="utf-8")
 	lastTime = int(f.read().rstrip())
 	currentTime = round(time.time() * 1000)
@@ -317,6 +310,7 @@ def checkAge():
 	else:
 		print("Keeping existing headlines.")
 	f.close()
+	return isOld
         
 # plays the loading screen video
 def playVideo():
@@ -326,7 +320,7 @@ def playVideo():
 	global videoFetchOn
 	window.show()
 	if videoFetchOn == True:
-		print("\n", "New headlines:")
+		print("" +"", "New headlines:")
 		fetchNew()
 		videoFetchOn = False
 	if soundOn == True:
@@ -373,6 +367,29 @@ def soundTimer():
 	global soundOn
 	soundOn = True
     
+# Overwrites a file with lines from a given list. Also removes apostrophes. 	
+def overWriteFile(fileName, listName):
+		# gets rid of " ’s " to prevent weird word combos
+		listName = [i.replace("’s", ":") for i in listName]	
+		
+		# overwrite new headlines to new headline file
+		f = open(fileName, "w", encoding="utf-8")
+		for element in listName:
+			f.write(element + "\n")
+		else:
+			f.close()
+
+		for item in listName:
+			print(item, "\n")
+
+# record time of headline fetch in milliseconds from epoch. 
+def recordTime(fileName):
+	currentTime = round(time.time() * 1000)
+	f = open(fileName, "w", encoding="utf-8")
+	timeStr = str(currentTime)
+	f.write(timeStr)
+	f.close()
+
 # GUIzero Properties 
 # ————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -441,3 +458,7 @@ typeSen()
 
 # main GUI loop
 app.display()
+
+
+#TODO: The checkAge() function only gets new headlines when the video is played. This probably needs to happen anytime the 
+# program is started regardless of whether the video runs. There's a bool called isOld to start with. 
