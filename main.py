@@ -32,6 +32,9 @@ videoFetchOn = False
 # Options for video, audio, and names
 # ——————————————————————————————————————————————————————
 
+# Toggles full screen mode.
+fullScreenOn = True
+
 # The video option plays the video on startup if True.
 videoBool = True
 
@@ -91,7 +94,7 @@ def grabNewHeadlines():
 
 	# Check to make sure there are headlines present. Doesn't overwrite if not. 
 	if len(headlineList) == 0:
-		print("Something went wrong grabbing new headlines. Leaving current headlines in place.")
+		print("\n", "Something went wrong when grabbing new headlines. Leaving current headlines in place.", "\n")
 
 	else:
 		overWriteFile(newHeadlinesFile, headlineList)
@@ -320,7 +323,6 @@ def playVideo():
 	global videoFetchOn
 	window.show()
 	if videoFetchOn == True:
-		print("\n", "New headlines:")
 		fetchNew()
 		videoFetchOn = False
 	if soundOn == True:
@@ -379,8 +381,11 @@ def overWriteFile(fileName, listName):
 		else:
 			f.close()
 
+		print("\n", "New headlines:", "\n")
+		print("\n", "———————————————————————————————————————————————", "\n")
 		for item in listName:
 			print(item, "\n")
+		print("———————————————————————————————————————————————", "\n")
 
 # record time of headline fetch in milliseconds from epoch. 
 def recordTime(fileName):
@@ -396,10 +401,6 @@ def recordTime(fileName):
 # initiates the GUI
 app = App(title = "Infinite Scroll 2.0", bg = "#000000", layout = "grid", width = 640, height = 480)
 app.tk.config(cursor = "none")
-app.full_screen = True
-
-# sets full screen for the main app
-app.set_full_screen()
 
 # initiates the window for video and the pictures it shows 
 window = Window(app, title = "", width = 640, height = 480, bg = "#000000", layout = "grid")
@@ -408,7 +409,6 @@ picture = Picture(window, image = get_path("images/load1.png"), grid = [0, 0])
 # video window properties 
 window.hide()
 window.tk.config(cursor = "none")
-window.full_screen = True
 
 # sets the logo in the main app
 logo = Picture(app, image = get_path("images/logo.png"), grid = [1, 3])
@@ -437,6 +437,15 @@ displayText.tk.config(insertbackground = "#00ff00", blockcursor = True, insertof
 displayText.tk.bind("<Key>", "pass")
 displayText.height = 5
 displayText.width = 16
+
+# sets full screen for the main app
+if fullScreenOn == True:
+	app.set_full_screen()
+	window.full_screen = True
+	app.full_screen = True
+else:
+	window.full_screen = False
+	app.full_screen = False
 
 # Main loop and scheduled functions
 # ————————————————————————————————————————————————————————————————————————————————————————————————————
