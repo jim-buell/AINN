@@ -14,6 +14,7 @@ import platform
 import tkinter
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 from pygame import mixer
+import threading
 
 # Global variables that persist to facilitate GUI display refresh
 # ——————————————————————————————————————————————————————
@@ -27,7 +28,6 @@ loadingCounter = 0
 wordDict = {"NN": [""], "JJ": [""], "NNP": [""], "verbTrans": [""], "ideo": [""], "verbING": [""], "while": [""], "is": [""], "?": [""], "verbState": [""], "demo": [""]}
 videoImage = ""
 videoCount = 0
-videoFetchOn = False
 
 # Options for video, audio, and names
 # ——————————————————————————————————————————————————————
@@ -224,7 +224,7 @@ def typeSen():
 			addMe = getword("{}".format(item))
 			mainStr = mainStr + addMe  + " "
 	mainStr = mainStr.upper() #makes string uppercase 
-	# skips strings that might be too long for screen
+	# skips strings that might be too long for the screen
 	if len(mainStr) >= 65:
 		print("String was", len(mainStr), "characters long, so skipping.")
 		print("The long string was: ", mainStr)
@@ -297,11 +297,9 @@ def updateText():
 				counter += 1
 				wordWrap += 1
 
-# checks to see if headlines are more than 1 hours old and gets new if so	
+# checks to see if headlines are more than 1 hour old and gets new if so	
 def checkAge():
 	timeFile = get_path("words/elapsedTime.txt")
-	global videoFetchOn
-	isOld = False
 	f = open(timeFile, "r", encoding="utf-8")
 	lastTime = int(f.read().rstrip())
 	currentTime = round(time.time() * 1000)
@@ -309,11 +307,12 @@ def checkAge():
 	print("Elapsed time is", round((elapsedTime / 60000)), "minutes.")
 	if elapsedTime >= 3600000:
 		print("Headlines are more than an hour old. Need to get a new set.")
-		videoFetchOn = True
+		fetchNew()
 	else:
 		print("Keeping existing headlines.")
+		# Loads existing words into memory from file since there was no fetch. 
+		getAllTypes()
 	f.close()
-	return isOld
         
 # plays the loading screen video
 def playVideo():
@@ -322,9 +321,6 @@ def playVideo():
 	global soundOn
 	global videoFetchOn
 	window.show()
-	if videoFetchOn == True:
-		fetchNew()
-		videoFetchOn = False
 	if soundOn == True:
 		if videoCount == 1:
 			playSound()
@@ -350,11 +346,6 @@ def fetchNew():
 	grabNewHeadlines()
 	getAllTypes()
 	print("Fetched new headlines at", time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()))
-
-# gets called every hour. when true, the fetchNew function runs during video
-def videoFetch():
-	global videoFetchOn
-	videoFetchOn = True	
 	
 # plays the startup chime
 def playSound():
@@ -381,8 +372,9 @@ def overWriteFile(fileName, listName):
 		else:
 			f.close()
 
-		print("\n", "New headlines:", "\n")
-		print("\n", "———————————————————————————————————————————————", "\n")
+		# Prints all new headlines.
+		print("\n" + "New headlines:")
+		print("\n" + "———————————————————————————————————————————————", "\n")
 		for item in listName:
 			print(item, "\n")
 		print("———————————————————————————————————————————————", "\n")
@@ -394,6 +386,12 @@ def recordTime(fileName):
 	timeStr = str(currentTime)
 	f.write(timeStr)
 	f.close()
+
+# Runs the headline fetching and word categorization in a seperate thread to avoid pausing the display on screen. 
+def fetchNewThreaded():
+	print("Trying to fetch new headlines in a thread.")
+	fetchingThread = threading.Thread(target = fetchNew, args=())
+	fetchingThread.start()
 
 # GUIzero Properties 
 # ————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -453,8 +451,8 @@ else:
 # Main Text Loop — Calls updateText repeatedly in the app loop — gets new letters to pass to the GUI and runs everything else...
 app.repeat(200, updateText)
 
-# gets new headlines every hour
-app.repeat(3600000, videoFetch)
+# gets new headlines every hour in a seperate thread
+app.repeat(3600000, fetchNewThreaded)
 
 # plays sound with video every 20 minutes
 app.repeat(1200000, soundTimer)
@@ -462,12 +460,7 @@ app.repeat(1200000, soundTimer)
 # startup sequences
 # checks if new headlines needed on startup, loads words, and sets the initial sentence
 checkAge()
-getAllTypes()
 typeSen()
 
 # main GUI loop
 app.display()
-
-
-#TODO: The checkAge() function only gets new headlines when the video is played. This probably needs to happen anytime the 
-# program is started regardless of whether the video runs. There's a bool called isOld to start with.
