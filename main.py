@@ -15,6 +15,7 @@ import tkinter
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 from pygame import mixer
 import threading
+import socket
 
 # Global variables that persist to facilitate GUI display refresh
 # ——————————————————————————————————————————————————————
@@ -80,17 +81,23 @@ def grabNewHeadlines():
 	for item in rssNames:
 		headlineLimit = 0
 		rssSources='{}'.format(item)
-		rssHeadlines = feedparser.parse(rssSources)
-
-		Headlines = rssHeadlines['entries']
-		for entries in Headlines:
-			if headlineLimit < 20:
-				if "news" in (entries['title']).lower():
-					headlineList.append(f"{entries['title']}.")
-					headlineLimit += 1
-				else:
-					headlineList.append(f"{entries['title']}.")
-					headlineLimit += 1
+		try:
+            # Set a number of seconds after which Feedparser will timeout trying to fetch an RSS feed. 
+			timeOutSeconds = 45
+			socket.setdefaulttimeout(timeOutSeconds)
+			rssHeadlines = feedparser.parse(rssSources)
+			Headlines = rssHeadlines['entries']
+			for entries in Headlines:
+				if headlineLimit < 20:
+					if "news" in (entries['title']).lower():
+						headlineList.append(f"{entries['title']}.")
+						headlineLimit += 1
+					else:
+						headlineList.append(f"{entries['title']}.")
+						headlineLimit += 1
+		except:
+			print("\n" + "Failed to get headlines from " + "{}".format(item))
+			print("Timed out after", timeOutSeconds, "seconds.", "\n")
 
 	# Check to make sure there are headlines present. Doesn't overwrite if not. 
 	if len(headlineList) == 0:
@@ -147,6 +154,7 @@ def sortAndStore(part):
 			f.write(element + " \n")
 		else:
 			f.close()
+		f.close()
 	
 	# loads static words stored in files and add words to global wordDict
 	if any(x in part for x in staticFiles):
@@ -307,7 +315,9 @@ def checkAge():
 	print("Elapsed time is", round((elapsedTime / 60000)), "minutes.")
 	if elapsedTime >= 3600000:
 		print("Headlines are more than an hour old. Need to get a new set.")
-		fetchNew()
+		# Runs getAllTypes first to load an old set of words into memory so there's something to display while fetching new headlines
+		getAllTypes()
+		fetchNewThreaded()
 	else:
 		print("Keeping existing headlines.")
 		# Loads existing words into memory from file since there was no fetch. 
@@ -464,3 +474,5 @@ typeSen()
 
 # main GUI loop
 app.display()
+
+#TODO: Seperate the sort and store from reading files into memory so it doesn't need to recategorize old words upon startup. 
