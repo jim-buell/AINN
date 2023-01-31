@@ -1,9 +1,10 @@
-click==8.0.4
-feedparser==6.0.8
+AppKit==0.2.8
+feedparser==6.0.10
 guizero==1.3.0
-joblib==1.1.0
+keras==2.11.0
+newsapi==0.1.1
 nltk==3.7
+numpy==1.23.5
+pandas==1.5.3
 pygame==2.1.2
-regex==2022.1.18
-sgmllib3k==1.0.0
-tqdm==4.62.3
+tensorflow==2.11.0

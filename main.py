@@ -474,5 +474,3 @@ typeSen()
 
 # main GUI loop
 app.display()
-
-#TODO: Seperate the sort and store from reading files into memory so it doesn't need to recategorize old words upon startup. 
