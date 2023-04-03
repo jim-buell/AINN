@@ -197,8 +197,8 @@ def getword(wordType):
 def typeSen():
 	# sentence parts !MUST ALSO ADD TO getAllTypes() and global wordDict!
 	if ideoOn == True:
-		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "ideo"]
-		proper = ["NNP", "NNP", "NNP", "NNP", "ideo"]
+		senParts = ["NN", "NNP", "NNP", "ideo"]
+		proper = ["NNP", "NNP", "ideo"]
 	elif demoOn == True:
 		senParts = ["NN", "NNP", "NNP", "NNP", "NNP", "demo"]
 		proper = ["NNP", "NNP", "NNP", "NNP", "demo"]
